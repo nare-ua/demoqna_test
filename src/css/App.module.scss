@@ -1,0 +1,46 @@
+.header {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    > img {
+      height: 82px;
+    }
+    .title {
+      color: black;
+      font-size: 55px;
+      line-height: 1em;
+      margin: 0;
+      font-family: 'Aero';
+      a {
+        color: black;
+      }
+      .blue {
+        color: #0069b4;
+      }
+      .yellow {
+        color: #fbe300;
+      }
+    }
+  }
+  
+  @media only screen 
+  and (max-width: 450px) {
+    .header {
+      .title {
+        font-size: 38px;
+      }
+    }
+    
+  }
+  
+  @media only screen 
+  and (max-width: 320px) {
+    .header {
+      .title {
+        font-size: 30px;
+      }
+    }
+    
+  }

@@ -1,13 +1,318 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont," Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+#root {
+  max-width: 1140px;
+  width: 100%;
+  min-width: 750px;
+  position: relative;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+h1 {
+  font-weight: 700;
+  font-style: normal;
+  font-size: 28px;
+  letter-spacing: normal;
+  color: #333333;
+}
+
+* {
+  box-sizing: border-box;
+  line-height: 1.5em;
+}
+
+textarea {
+  font-family: inherit;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 30px -5px #0069d9;
+  background-color: #0069d9;
+  border-color: #0069d9;
+}
+
+a {
+  color: #0069b4;
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+  color: #0069b4;
+}
+
+.card {
+  padding: .4em .4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
+  color: white;
+  position: relative; 
+  display: inline-block;
+}
+.card:hover>.tooltip {
+  opacity: 1;
+}
+.innerTip {
+  border: 1px solid white;
+  padding: 2px 5px;
+  font-size: 10px;
+  margin-left: 5px;
+}
+.activeTooltip {
+  opacity: 1 !important;
+}
+
+.leftTooltip {
+  left: 0 !important;
+}
+.leftTooltip > .tooltipInner {
+  float: left;   
+}
+
+.tooltip {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 200px;
+  user-select: none;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 15;
+}
+.tooltipInner {
+  margin-top: 5px;
+  border-radius: .25rem;
+  max-width: 200px;
+  white-space: normal;
+  color: white;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 14px;
+  padding: 5px 10px;
+  display: block;
+  float: right;
+}
+.margin_r {
+  margin-right: 7px;
+}
+
+@media only screen 
+and (max-width: 768px) {
+  #root {
+    width: 100%;
+    min-width: 100%;
+    overflow-x: hidden;
+  }
+  .card:hover>.tooltip {
+    opacity: 0;
+  }
+  body {
+    padding: 0;
+  }
+}
+
+.transcript {
+    color: red;
+}
+
+.doridori-transcript {
+    color: gray;
+    font-family: Arial;
+}
+
+.doridori-caption-container {
+  height: 9rem;
+  padding-right: 5px;
+  padding-top: 5px;
+  width: 50%;
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+}
+
+.doridori-footer {
+	display: flex;
+	justify-content: space-between;
+}
+
+.doridori-chats-container {
+  height: 9rem;
+	font-size: 14px;
+	overflow: auto;
+  display: flex;
+  width: 100%;
+  flex-grow: 1;
+  flex-direction: column-reverse;
+}
+
+.doridori-caption-julie {
+	  -webkit-animation: gZmgDU 0.3s ease forwards;
+    animation: gZmgDU 0.3s ease forwards;
+    background: #f6f8fa57;
+    border-radius: 18px 18px 0 18px;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 15%);
+    color: #4a4a4a;
+    display: inline-block;
+    font-size: 16px;
+    max-width: 50%;
+    margin: 0 0 10px 0;
+    overflow: hidden;
+    position: relative;
+    padding: 12px;
+    /*-webkit-transform: scale(0);
+    
+    -ms-transform: scale(0);
+    transform: scale(0);*/
+    -webkit-transform-origin: bottom right;
+    -ms-transform-origin: bottom right;
+    transform-origin: bottom right;
+
+}
+
+.doridori-caption {
+    animation: gZmgDU 0.3s ease forwards;
+    background: rgb(0, 150, 255);
+    border-radius: 18px 18px 18px 0;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 15%);
+    color: #fff;
+    display: inline-block;
+    font-size: 16px;
+    font-family: Arial;
+    max-width: 50%;
+    margin: 0 0 10px 0;
+    overflow: hidden;
+    position: relative;
+    padding: 12px;
+    /*
+    -webkit-transform: scale(0);
+    -ms-transform: scale(0);
+    transform: scale(0);*/
+    -webkit-transform-origin: bottom left;
+    -ms-transform-origin: bottom left;
+    transform-origin: bottom left;
+    justify-content: flex-start;
+    /*
+    color: black;
+    line-height: 1em;
+    margin: 0;
+    margin-top: 10px;
+    */
+}
+
+.doridori-button-wrapper {
+	display: flex; 
+	justify-content: space-between;
+	margin-top: 12px;
+}
+
+.mircophone-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /*display: none;*/
+  /*width: 100vw;*/
+  /*height: 10vh;*/
+}
+.microphone-icon-container {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-image: linear-gradient(128deg, #ffffff, #647c88);
+  padding: 8px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  cursor: pointer;
+}
+.microphone-icon-container.listening::before {
+  content: "";
+  width: 40px;
+  height: 40px;
+  background-color: #3344ff81;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform:translate(-50%, -50%) scale(1.4);
+  border-radius: 50%;
+  animation: listening infinite 1.5s;
+}
+@keyframes listening{
+  0%{
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100%{
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+}
+.microphone-wrapper {
+	/*margin-top: -40px;*/
+	padding-bottom: 8px;
+}
+
+.microphone-icon {
+  width: 100%;
+  height: 100%;
+}
+.microphone-status {
+  font-size: 22px;
+  /*margin-right: 20px;*/
+  /*min-width: 215px;*/
+}
+.btn {
+  border: none;
+  padding: 5px 10px;
+  margin-right: 10px;
+  outline: none;
+  cursor: pointer;
+  font-size: 13px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 10px 5px #ffffff1a;
+}
+.microphone-result-container {
+  text-align: center;
+  height: 50vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 30px;
+
+}
+.microphone-result-text {
+  margin-bottom: 30px;
+  width: 70vw;
+  overflow-y: auto;
+}
+.microphone-stop {
+}
+
+.microphone-reset {
+  border: 1px solid #fff;
+  background: none;
+  color: blue;
+  width: fit-content;
+}
+
+
