@@ -4,10 +4,10 @@ import { Nav } from "../components/Nav";
 import QnaCreateQ from "./qnaRow/qnaCreateQ";
 
 export default class Demo_qna extends Component{
-
-     
-
+    
+    
     render(){
+        let _introQ = "Paste the text of the article or URL you want to make questions. The longer article entered, the more questions you can create.";
         return (
             <div className="container">
                 <Header title="QnA"></Header>
@@ -16,7 +16,7 @@ export default class Demo_qna extends Component{
                 <ul>
                     <li><b>Create the questions</b></li>
                 </ul>
-                <a>Paste the text of the article or URL you want to make questions. The longer article entered, the more questions you can create.</a>
+                <a>{_introQ}</a>
                 <div className="row">
                     <QnaCreateQ></QnaCreateQ>
                 </div>

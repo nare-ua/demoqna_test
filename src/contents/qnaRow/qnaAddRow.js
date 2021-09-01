@@ -1,19 +1,19 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
-import { ShortAnswerBox, MultiTypeAnswerBox } from ".";
+import ShortAnswerBox from "./typeContents/basicTypeAnswerContents";
+import MultiTypeAnswerBox from "./typeContents/multiTypeAnswerBox";
 
 export default class qnaAddRow extends Component{
     typeContents=()=>{
         let contentSelectType = this.props.questionsParam._question_type;
-        if (contentSelectType == "MULTIPLE_CHOICE") {
-            return <MultiTypeAnswerBox />
+        if (contentSelectType === "MULTIPLE_CHOICE") {
+            return <MultiTypeAnswerBox />;
+            // p->in
         } else {
-            return <ShortAnswerBox />
+            return <ShortAnswerBox />;
         }
     }
 
     render(){
-        let _selecttypeContents=null;
         let _typeContents = this.typeContents();
         return(
             <div className="row">

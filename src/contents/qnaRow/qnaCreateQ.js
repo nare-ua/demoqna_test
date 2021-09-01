@@ -1,12 +1,13 @@
 import { Component } from "react";
+import InputTypeContents from "./typeContents/inputContentsType";
+import InputTypeContents2 from "./typeContents/inputContents2";
 
 export default class QnaCreateQ extends Component{
     constructor(){
         super();
         this.state = {
-            mode: "TEXT",
-            nowByte: '0',
-            textColor:'green',
+            mode: "inputTEXT",
+            typeInput:"",
             questionsParam:[
                 {idxQ:1,question_type:"", text:"",}
             ],
@@ -26,15 +27,15 @@ export default class QnaCreateQ extends Component{
             ],
             hintsRes:[
                 {text:"", hints:[{question:"",highlights:[[0]]}]}
-            ]
+            ],
+            
         };
-        this.fnByteLimitCheck = this.fnByteLimitCheck.bind(this);
-        
+        this.inputType_onClick=this.inputType_onClick.bind(this);
     }
     // qna add row event 
     makeQuestions = () => {
-        let arr = []
-        let str;
+        // let arr = []
+        // let str;
         
     }
     handleCICG = (e) => {
@@ -42,42 +43,23 @@ export default class QnaCreateQ extends Component{
         
     }
     
-
-    fnByteLimitCheck=(e)=>{
-        // alert(e.target.value)
-        const maxByte = 10000;//maxBytes
-        const textVal = e.target.value;//입력한 값
-        const textLen = textVal.length;//입력한 글자수
-        let changeColor = "green";
-        let totalByte = 0;
-        for(let i = 0; i<textLen; i++) {
-            const eachChar = textVal.charAt(i);
-            const uniChar = escape(eachChar);
-            if(uniChar.length > 4) {
-                totalByte +=2;//한글
-            } else {
-                totalByte += 1;//영어
-            }
-        }
-        const getNowByte = document.getElementById("nowByte");
-        const getStyle = getNowByte.getAttribute("style");
-        if (totalByte > maxByte) {
-            getNowByte.innerText = totalByte;
-            changeColor = "red";
+    inputType_onClick = (e) => {
+        let inputTypeValue = e.target.value;
+        // let inputContents = [...this.state.mode];
+        // let inputCheckLimit;
+        let inputTypeCompo;
+        console.log(inputTypeValue);
+        // inputContents:[],
+        //     inputCheckLimit:"",
+        if (inputTypeValue == "inputText") {
+            inputTypeCompo = <InputTypeContents />
         } else {
-            getNowByte.innerText = totalByte;
-            changeColor = "#00cc00";
+            //inputTypeValue === "inputURL"
+            inputTypeCompo = <InputTypeContents2/>
         }
         this.setState({
-            nowByte:e.target.value,
-            textColor:changeColor
-        });
-        
-
-    }   
-    inputType_onClick = (e) => {
-        this.state.mode = e.target.value;
-        let inputTypeBox;
+            typeInput:inputTypeCompo,
+        })
 
     }
     questionType_onClick = (e) =>{
@@ -96,7 +78,7 @@ export default class QnaCreateQ extends Component{
         
         
         //output
-        let arr = [...this.state.questionsParam]
+        // let arr = [...this.state.questionsParam]
         //idx, input값, output값, q타입, choices구분...
         let _outputValue;//답변값
         let _answer;//답
@@ -106,36 +88,17 @@ export default class QnaCreateQ extends Component{
     }
     render(){
         let _mode = this.state.mode;
-        let _content=null;
+        let _content=this.state.typeInput;
         let _checkLimit=null;
         let _selectedType=this.state.selectedType;
 
-
-        
-        switch(_mode){
-            case "inputText":
-                _content = <textarea rows="8" className="form-control"
-                id="textArea_byteLimit" 
-                name="textArea_byteLimit" 
-                onChange={this.fnByteLimitCheck}></textarea>;
-                _checkLimit=<div className="row">
-                    <br/>
-                    <sup><span id="nowByte" onChange={this.fnByteLimitCheck} 
-                    style={{color:this.state.textColor}}>0</span>|10,000 bytes</sup>
-                </div>
-                break;
-            case "inputURL":
-                _content = <input className="form-control"
-                id="input"></input>
-                break;
-        }
         return(
             <div className="container">
                     
                     <div className="row">
                         <label>
                             <input type="radio" name="input_type"
-                            value="TEXT" defaultChecked
+                            value="inputText" defaultChecked
                             onClick={(e) => this.inputType_onClick(e)}
                             />Input Text
                         </label>
@@ -147,7 +110,7 @@ export default class QnaCreateQ extends Component{
                     </div><br/>
 
                     {_content}
-                    {_checkLimit}
+                    
                     <br/>
                 <ul>
                     <li><b>Select an answer type</b></li>
