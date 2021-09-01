@@ -10,7 +10,7 @@ export default class Demo_qna extends Component{
         let _introQ = "Paste the text of the article or URL you want to make questions. The longer article entered, the more questions you can create.";
         return (
             <div className="container">
-                <Header title="QnA"></Header>
+                <Header title="Q&A"></Header>
                 <Nav></Nav>
                 <h1>Q&A</h1>
                 <ul>

@@ -1,15 +1,17 @@
 import { Component } from "react";
 import InputTypeContents from "./typeContents/inputContentsType";
 import InputTypeContents2 from "./typeContents/inputContents2";
+import QnaAddRow from "./qnaAddRow";
 
 export default class QnaCreateQ extends Component{
     constructor(){
         super();
         this.state = {
             mode: "inputTEXT",
-            typeInput:"",
+            typeInput:<InputTypeContents />,
+            answerTypeContents:"",
             questionsParam:[
-                {idxQ:1,question_type:"", text:"",}
+                {idxQ:0,question_type:"MUTIPLE_CHOICE", text:"",},
             ],
             getQuestion:[
                 {
@@ -31,6 +33,8 @@ export default class QnaCreateQ extends Component{
             
         };
         this.inputType_onClick=this.inputType_onClick.bind(this);
+        this.questionType_onClick=this.questionType_onClick.bind(this);
+        this.createQuestion=this.createQuestion.bind(this);
     }
     // qna add row event 
     makeQuestions = () => {
@@ -64,12 +68,32 @@ export default class QnaCreateQ extends Component{
     }
     questionType_onClick = (e) =>{
         // alert(e.target.value);
-        const _typeValue = e.target.value;
+        const _arr = [];
+        let typeValue = e.target.value;
+        console.log("qnaCreateQ :", typeValue);
+        _arr.question_type = typeValue;
+        _arr.idxQ = 0;
+        _arr.text = "test";
+        // let typeValueContentReturn;
+        // if (typeValue == "MUTIPLE_CHOICE") {
+            // typeValueContentReturn
+            // typeValueContentReturn=<QnaAddRow qnaAddRowType={typeValue} />
+        // } else {
 
+        // }
+        this.setState({
+            questionsParam: _arr,
+        })
     }
 
     //createQuestion EventHandler
     createQuestion = (e) => {
+        const _arr=[...this.state.questionsParam];
+        let typeValueContentReturn = _arr.map((qnaAddRowType, i)=>{
+            
+        });
+
+        typeValueContentReturn=<QnaAddRow qnaAddRowType={this.state.questionsParam.question_type} />
         //input
         //fnByteLimitCheck에서  onChange로 state값 셋팅
         // let inTextValue = getTextValue.getAttribute("value");
@@ -85,12 +109,14 @@ export default class QnaCreateQ extends Component{
         let _question;//질문값
         let _choices=[];//4지선다
         // p->in map for addrow
+        this.setState({
+            answerTypeContents: typeValueContentReturn,
+        })
     }
     render(){
-        let _mode = this.state.mode;
         let _content=this.state.typeInput;
-        let _checkLimit=null;
-        let _selectedType=this.state.selectedType;
+        let _answerContent = this.state.answerTypeContents;
+
 
         return(
             <div className="container">
@@ -131,11 +157,15 @@ export default class QnaCreateQ extends Component{
                     <div className="row">
                         <div className="col-md-6 col-sm-6">
                             <button className="btn btn-primary" 
-                            onChange={(e) => this.createQuestion(e)}>Enter</button>
+                            onClick={(e) => this.createQuestion(e)}>Enter</button>
                         </div>
                     </div>
+                {_answerContent}
                 </div>
-                
         )
+    }//render
+
+    componentDidMount(){
+        
     }
 }

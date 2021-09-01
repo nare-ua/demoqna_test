@@ -2,25 +2,39 @@ import { Component } from "react";
 import ShortAnswerBox from "./typeContents/basicTypeAnswerContents";
 import MultiTypeAnswerBox from "./typeContents/multiTypeAnswerBox";
 
-export default class qnaAddRow extends Component{
-    typeContents=()=>{
-        let contentSelectType = this.props.questionsParam._question_type;
-        if (contentSelectType === "MULTIPLE_CHOICE") {
-            return <MultiTypeAnswerBox />;
-            // p->in
-        } else {
-            return <ShortAnswerBox />;
-        }
+export default class QnaAddRow extends Component{
+    state={
+        qnaAddRowType:this.props.qnaAddRowType,
     }
+    // typeContents=()=>{
+    //     let contentSelectType = this.props.questionsParam._question_type;
+    //     if (contentSelectType === "MULTIPLE_CHOICE") {
+    //         return <MultiTypeAnswerBox />;
+    //         // p->in
+    //     } else {
+    //         return <ShortAnswerBox />;
+    //     }
+    // }
 
     render(){
-        let _typeContents = this.typeContents();
+        let _contentSelectType = this.state.qnaAddRowType;
+        let _typeContents;
+        console.log("qnaAddRow :", _contentSelectType);
+        switch(_contentSelectType){
+            case "MULTIPLE_CHOICE":
+                _typeContents = <MultiTypeAnswerBox />;
+                break;
+            case "SHORT_ANSWER":
+                _typeContents = <ShortAnswerBox />;
+                break;
+        }
+
         return(
             <div className="row">
                 <div className="row">
                     Q1
                 </div>
-                <span className="">{this.props._question}</span>
+                <span className="">{_contentSelectType}</span>
                 <div className="row">
                     Answer.
                 </div>

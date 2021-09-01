@@ -4,7 +4,7 @@ import Nav from '../Nav/Nav'
 const Home=()=>{
     return(
         <div className="container p-4 text-center">
-            <Header title="United A Sosciates" />
+            <Header title="nlp" />
             <Nav />
             <h1>Home</h1>
 

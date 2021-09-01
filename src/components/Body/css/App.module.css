@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+    
+  }
+  .title {
+    color: black;
+    font-size: 55px;
+    line-height: 1em;
+    margin: 0;
+    font-family: 'Aero';
+  }
+  .blue {
+    color: #0069b4;
+  }
+  .yellow {
+    color: #fbe300;
+  }
+  .a {
+    color: black;
+  }
+  
