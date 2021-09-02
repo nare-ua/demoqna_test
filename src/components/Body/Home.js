@@ -1,5 +1,6 @@
 import Header from './Header'
 import Nav from '../Nav/Nav'
+import { Link } from 'react-router-dom'
 
 const Home=()=>{
     return(
@@ -7,6 +8,7 @@ const Home=()=>{
             <Header title="nlp" />
             <Nav />
             <h1>Home</h1>
+            <Link to="http://211.248.197.224:13300/">http://211.248.197.224:13300/</Link>
 
         </div>
     )

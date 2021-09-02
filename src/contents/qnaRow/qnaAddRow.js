@@ -5,6 +5,7 @@ import MultiTypeAnswerBox from "./typeContents/multiTypeAnswerBox";
 export default class QnaAddRow extends Component{
     state={
         qnaAddRowType:this.props.qnaAddRowType,
+        qnaIndex:this.props.qnaIdx,
     }
     // typeContents=()=>{
     //     let contentSelectType = this.props.questionsParam._question_type;
@@ -15,7 +16,7 @@ export default class QnaAddRow extends Component{
     //         return <ShortAnswerBox />;
     //     }
     // }
-
+    
     render(){
         let _contentSelectType = this.state.qnaAddRowType;
         let _typeContents;
@@ -32,7 +33,7 @@ export default class QnaAddRow extends Component{
         return(
             <div className="row">
                 <div className="row">
-                    Q1
+                    Q{this.qnaIndex}
                 </div>
                 <span className="">{_contentSelectType}</span>
                 <div className="row">
@@ -40,6 +41,7 @@ export default class QnaAddRow extends Component{
                 </div>
                 {/* type에 따라 4지선다, 주관식 변경 컴포넌트 */}
                 {_typeContents}
+
             </div>
         );
     }

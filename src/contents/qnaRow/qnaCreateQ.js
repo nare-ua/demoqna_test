@@ -1,12 +1,17 @@
-import { Component } from "react";
+import { Component,useState } from "react";
 import InputTypeContents from "./typeContents/inputContentsType";
 import InputTypeContents2 from "./typeContents/inputContents2";
 import QnaAddRow from "./qnaAddRow";
+import axios from "axios";
 
 export default class QnaCreateQ extends Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
+            textColor:'green',
+            nowByte: '0',
+            questionTextValue: "",
+            questionRadioValue: "MUTIPLE_CHOICE",
             mode: "inputTEXT",
             typeInput:<InputTypeContents />,
             answerTypeContents:"",
@@ -33,8 +38,39 @@ export default class QnaCreateQ extends Component{
             
         };
         this.inputType_onClick=this.inputType_onClick.bind(this);
-        this.questionType_onClick=this.questionType_onClick.bind(this);
+        this.requestAPI = this.requestAPI.bind(this);
+        this.setterQuestionText = this.setterQuestionText.bind(this);
+        // this.questionType_onClick=this.questionType_onClick.bind(this);
         this.createQuestion=this.createQuestion.bind(this);
+    }
+    //통신 method
+    requestAPI = () => {
+        let url="http://211.248.197.224:18111/questions";
+        axios.post(url, {
+                question_type: this.state.questionsParam.question_type,
+                text: this.state.questionsParam.text
+        },
+        {
+            headers:{
+                'Content-Type': 'application/json',
+                'accept': 'application/json'
+            }
+        })
+        .then((res)=>{
+            this.setState({
+                getQuestion:res.data
+            })
+            console.log("response:", JSON.stringify(res.data))
+        })
+        .catch((err)=>{
+            console.log("error :", err.message);
+        })
+    }
+
+    setterQuestionText = (questionTextValue) => {
+        this.setState({
+            questionTextValue:questionTextValue
+        })
     }
     // qna add row event 
     makeQuestions = () => {
@@ -66,34 +102,40 @@ export default class QnaCreateQ extends Component{
         })
 
     }
+
+  
+
     questionType_onClick = (e) =>{
-        // alert(e.target.value);
-        const _arr = [];
+        // const _arr = [];
         let typeValue = e.target.value;
         console.log("qnaCreateQ :", typeValue);
-        _arr.question_type = typeValue;
-        _arr.idxQ = 0;
-        _arr.text = "test";
-        // let typeValueContentReturn;
-        // if (typeValue == "MUTIPLE_CHOICE") {
-            // typeValueContentReturn
-            // typeValueContentReturn=<QnaAddRow qnaAddRowType={typeValue} />
-        // } else {
-
-        // }
+        // _arr.question_type = typeValue;
+        // _arr.idxQ = 0;
+        // _arr.text = this.state.questionTextValue;
+        
         this.setState({
-            questionsParam: _arr,
+            questionRadioValue: typeValue,
         })
     }
 
     //createQuestion EventHandler
     createQuestion = (e) => {
-        const _arr=[...this.state.questionsParam];
-        let typeValueContentReturn = _arr.map((qnaAddRowType, i)=>{
-            
-        });
+        const _arr=[];
+        _arr.question_type = this.state.questionRadioValue;
+        _arr.text = document.getElementById("textArea_byteLimit").value;
+        // _arr.idxQ = ;
+        console.log("params :", _arr.text);
+        console.log("params-type :", _arr.question_type);
+        this.requestAPI();
+        // let typeValueContentReturn = _arr.map((questionsP, i)=>{
+        //     return <QnaAddRow qnaAddRowType={questionsP.question_type} 
+        //     key={i}
+        //     qnaIdx={questionsP.idxQ} />
+        // });
 
-        typeValueContentReturn=<QnaAddRow qnaAddRowType={this.state.questionsParam.question_type} />
+        // typeValueContentReturn=
+        // <QnaAddRow qnaAddRowType={this.state.questionsParam.question_type} 
+        // qnaIdx={this.state.questionsParam.idxQ} />
         //input
         //fnByteLimitCheck에서  onChange로 state값 셋팅
         // let inTextValue = getTextValue.getAttribute("value");
@@ -110,9 +152,11 @@ export default class QnaCreateQ extends Component{
         let _choices=[];//4지선다
         // p->in map for addrow
         this.setState({
-            answerTypeContents: typeValueContentReturn,
+            questionsParam:_arr,
+            // answerTypeContents: typeValueContentReturn,
         })
     }
+
     render(){
         let _content=this.state.typeInput;
         let _answerContent = this.state.answerTypeContents;
@@ -123,13 +167,13 @@ export default class QnaCreateQ extends Component{
                     
                     <div className="row">
                         <label>
-                            <input type="radio" name="input_type"
+                            <input type="radio" name="text"
                             value="inputText" defaultChecked
                             onClick={(e) => this.inputType_onClick(e)}
                             />Input Text
                         </label>
                         <label>
-                            <input type="radio" name="input_type"
+                            <input type="radio" name="text"
                             onClick={(e) => this.inputType_onClick(e)}
                             value="URL" />Input URL
                         </label>
@@ -165,7 +209,5 @@ export default class QnaCreateQ extends Component{
         )
     }//render
 
-    componentDidMount(){
-        
-    }
+    
 }

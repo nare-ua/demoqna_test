@@ -1,13 +1,7 @@
 import { Component } from "react";
 
 export default class InputTypeContents extends Component{
-    constructor(){
-        super();
-        this.state={
-            textColor:'green',
-            nowByte: '0',
-        }
-    }
+    
     fnByteLimitCheck=(e)=>{
         // alert(e.target.value)
         const maxByte = 10000;//maxBytes
@@ -29,16 +23,13 @@ export default class InputTypeContents extends Component{
         if (totalByte > maxByte) {
             getNowByte.innerText = totalByte;
             changeColor = "red";
+            getNowByte.style.color=changeColor;
         } else {
             getNowByte.innerText = totalByte;
             changeColor = "#00cc00";
+            getNowByte.style.color=changeColor;
         }
-        this.setState({
-            nowByte:e.target.value,
-            textColor:changeColor
-        });
         
-
     } 
     render(){
         return(
@@ -52,7 +43,7 @@ export default class InputTypeContents extends Component{
                 <div className="row">
                     <br/>
                     <sup><span id="nowByte" onChange={(e)=>this.fnByteLimitCheck(e)} 
-                    style={{color:this.state.textColor}}>0</span>|10,000 bytes</sup>
+                    style={{color:this.textColor}}>0</span>|10,000 bytes</sup>
                 </div>
             </div>
         );
