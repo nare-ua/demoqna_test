@@ -1,12 +1,12 @@
-import { Component } from "react";
+import React from "react";
 import ShortAnswerBox from "./typeContents/basicTypeAnswerContents";
 import MultiTypeAnswerBox from "./typeContents/multiTypeAnswerBox";
 
-export default class QnaAddRow extends Component{
-    state={
-        qnaAddRowType:this.props.qnaAddRowType,
-        qnaIndex:this.props.qnaIdx,
-    }
+const QnaAddRow = (props) => {
+    // state={
+    //     qnaAddRowType:this.props.qnaAddRowType,
+    //     qnaIndex:this.props.qnaIdx,
+    // }
     // typeContents=()=>{
     //     let contentSelectType = this.props.questionsParam._question_type;
     //     if (contentSelectType === "MULTIPLE_CHOICE") {
@@ -17,7 +17,7 @@ export default class QnaAddRow extends Component{
     //     }
     // }
     
-    render(){
+    
         let _contentSelectType = this.state.qnaAddRowType;
         let _typeContents;
         console.log("qnaAddRow :", _contentSelectType);
@@ -44,5 +44,7 @@ export default class QnaAddRow extends Component{
 
             </div>
         );
-    }
+    
 }
+
+export default QnaAddRow;

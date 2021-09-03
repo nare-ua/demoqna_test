@@ -44,11 +44,13 @@ export default class QnaCreateQ extends Component{
         this.createQuestion=this.createQuestion.bind(this);
     }
     //통신 method
-    requestAPI = () => {
+    requestAPI = (params) => {
+        console.log("params :", params.text);
+        console.log("params-type :", params.question_type);
         let url="http://211.248.197.224:18111/questions";
         axios.post(url, {
-                question_type: this.state.questionsParam.question_type,
-                text: this.state.questionsParam.text
+                question_type: params.question_type,
+                text: params.text,
         },
         {
             headers:{
@@ -95,7 +97,7 @@ export default class QnaCreateQ extends Component{
             inputTypeCompo = <InputTypeContents />
         } else {
             //inputTypeValue === "inputURL"
-            inputTypeCompo = <InputTypeContents2/>
+            inputTypeCompo = <InputTypeContents2 />
         }
         this.setState({
             typeInput:inputTypeCompo,
@@ -124,9 +126,10 @@ export default class QnaCreateQ extends Component{
         _arr.question_type = this.state.questionRadioValue;
         _arr.text = document.getElementById("textArea_byteLimit").value;
         // _arr.idxQ = ;
-        console.log("params :", _arr.text);
-        console.log("params-type :", _arr.question_type);
-        this.requestAPI();
+        // console.log("params :", _arr.text);
+        // console.log("params-type :", _arr.question_type);
+        this.requestAPI(_arr);//getQuestion 값 셋팅
+        
         // let typeValueContentReturn = _arr.map((questionsP, i)=>{
         //     return <QnaAddRow qnaAddRowType={questionsP.question_type} 
         //     key={i}
