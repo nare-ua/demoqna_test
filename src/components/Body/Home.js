@@ -8,7 +8,7 @@ const Home=()=>{
             <Header title="nlp" />
             <Nav />
             <h1>Home</h1>
-            <Link to="http://211.248.197.224:13300/">http://211.248.197.224:13300/</Link>
+            <Link to="http://211.248.186.164:13300/">http://211.248.186.164:13300/</Link>
 
         </div>
     )

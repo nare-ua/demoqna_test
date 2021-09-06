@@ -3,6 +3,7 @@ import ShortAnswerBox from "./typeContents/basicTypeAnswerContents";
 import MultiTypeAnswerBox from "./typeContents/multiTypeAnswerBox";
 
 const QnaAddRow = (props) => {
+    console.log("props:", props);
     // state={
     //     qnaAddRowType:this.props.qnaAddRowType,
     //     qnaIndex:this.props.qnaIdx,
@@ -18,12 +19,15 @@ const QnaAddRow = (props) => {
     // }
     
     
-        let _contentSelectType = this.state.qnaAddRowType;
+        let _contentSelectType = props.questions.question_type;
+        let _qnaIndex = props.index+1;
         let _typeContents;
         console.log("qnaAddRow :", _contentSelectType);
         switch(_contentSelectType){
             case "MULTIPLE_CHOICE":
-                _typeContents = <MultiTypeAnswerBox />;
+                console.log("qnaChoices :", props.questions.choices);
+                _typeContents = <MultiTypeAnswerBox choices={props.questions.choices} index={_qnaIndex} answer = {props.questions.answer}
+                onClick={(e) => props.onClick(e)}/>;
                 break;
             case "SHORT_ANSWER":
                 _typeContents = <ShortAnswerBox />;
@@ -33,14 +37,15 @@ const QnaAddRow = (props) => {
         return(
             <div className="row">
                 <div className="row">
-                    Q{this.qnaIndex}
+                    Q{_qnaIndex}
                 </div>
-                <span className="">{_contentSelectType}</span>
+                <span className="">{props.questions.question}</span>
                 <div className="row">
                     Answer.
                 </div>
                 {/* type에 따라 4지선다, 주관식 변경 컴포넌트 */}
                 {_typeContents}
+                {/* hint/Enter */}
 
             </div>
         );
