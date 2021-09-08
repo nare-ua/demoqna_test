@@ -3,7 +3,7 @@ import InputTypeContents from "./typeContents/inputContentsType";
 import InputTypeContents2 from "./typeContents/inputContents2";
 import QnaAddRow from "./qnaAddRow";
 import axios from "axios";
-import { grey } from "@material-ui/core/colors";
+import { Button,Spinner } from "react-bootstrap";
 
 export default class QnaCreateQ extends Component{
     constructor(props){
@@ -16,7 +16,21 @@ export default class QnaCreateQ extends Component{
             questionRadioValue: "MULTIPLE_CHOICE",
             mode: "inputTEXT",
             typeInput:<InputTypeContents />,
+            loadingBtn:<Button variant="primary" disabled>
+            <Spinner
+              as="span"
+              animation="grow"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+            Loading...
+          </Button>,
+            enterBtn:<Button variant="primary" 
+            onClick={(e) => this.createQuestion(e)}>Enter</Button>,
             answerTypeContents:"",
+            btnCtr:<Button variant="primary" 
+            onClick={(e) => this.createQuestion(e)}>Enter</Button>,
             questionsParam:[
                 {idxQ:0,question_type:"MULTIPLE_CHOICE", text:"",},
             ],
@@ -48,6 +62,10 @@ export default class QnaCreateQ extends Component{
     //통신 method
     requestAPI = (params) => {
         console.log("params :", params.text);
+        // this.state.btnCtr = this.state.loadingBtn;
+        this.setState({
+            btnCtr:this.state.loadingBtn,
+        })
         // console.log("params-type :", params.question_type);
         let url="http://211.248.186.164:18112/questions";
         axios.post(url, {
@@ -78,7 +96,23 @@ export default class QnaCreateQ extends Component{
             
         })
         .catch((err)=>{
-            console.log("error :", err.message);
+            if (err.response) {
+                // 백에서 보낸 에러
+                console.log("err.response:::", err.response.data);
+                console.log(err.response.status);
+                console.log(err.response.headers);
+            } else if (err.request) {
+                console.log("err.request:::", err.request);
+            } else {
+                // 기타 에러
+                console.log("err.message:::", err.message);
+
+            }
+        })
+        .finally(()=>{
+            this.setState({
+                btnCtr:this.state.enterBtn,
+            })
         })
     }
 
@@ -126,15 +160,17 @@ export default class QnaCreateQ extends Component{
     //createQuestion EventHandler
     createQuestion = (e) => {
         // console.log("QNACreate:::", document.getElementById("textArea_byteLimit").value)
-        if (document.getElementById("textArea_byteLimit").value.trim()=="") {
-            alert("Please enter your text");
+        let checkValue = document.getElementById("textArea_byteLimit").value;
+        if (checkValue.trim()=="") {
+            alert("Please enter your text.");
+            return;
+        } else if (checkValue.length < 10) {
+            alert("Please enter at least 10 characters.");
             return;
         } else {
-            
             const _arr=[];
             _arr.question_type = this.state.questionRadioValue;
-            _arr.text = document.getElementById("textArea_byteLimit").value;
-            
+            _arr.text = checkValue;
             this.requestAPI(_arr);//getQuestion 값 셋팅
         }
     }
@@ -201,8 +237,7 @@ export default class QnaCreateQ extends Component{
                     </div>
                     <div className="row" style={{display:"flex",alignItems:"right", justifyContent:"right"}}>
                         <div className="col-1">
-                            <button className="btn btn-primary" 
-                            onClick={(e) => this.createQuestion(e)}>Enter</button>
+                            {this.state.btnCtr}
                         </div>
                     </div>
                 {_answerContent}
