@@ -1,4 +1,4 @@
-import { Alert, Button } from "react-bootstrap";
+import { Alert, Button, Card } from "react-bootstrap";
 import React, { useEffect, useState } from "react";
 import ShortAnswerBox from "./typeContents/basicTypeAnswerContents";
 import MultiTypeAnswerBox from "./typeContents/multiTypeAnswerBox";
@@ -18,7 +18,8 @@ const QnaAddRow = (props) => {
     if (_qnaIndex == 1) {
         _hrTag = <hr style={{
             color:"white",
-            border:"1px dotted grey"
+            border:"2px dotted grey",
+            marginTop:"5px"
         }}/>
     } else {
         _hrTag = "";
@@ -82,17 +83,20 @@ const QnaAddRow = (props) => {
     return(
         <div className="row" style={{marginTop:"10px"}}>
             {_hrTag}
-            <div className="row" style={{marginTop:"20px"}}>
-                Q{_qnaIndex}
-            </div>
-            <span className="">{props.questions.question}</span>
-            <div className="row">
-                Answer.
-            </div>
-            {/* type에 따라 4지선다, 주관식 변경 컴포넌트 */}
-            {_typeContents}
+            <Card border="primary" as="h1" style={{color:"black", textAlign:"left"}}> 
+                <Card.Header style={{fontSize:"1.3em"}}>Q{_qnaIndex}.</Card.Header>
+                <Card.Body>
+                    <Card.Title><span className="">{props.questions.question}</span></Card.Title>
+                    <Card.Subtitle className="m-2 text-muted">Answer :</Card.Subtitle>
+                    <Card.Text style={{fontSize:"1.5em",fontWeight:"400"}}>
+                        {/* type에 따라 4지선다, 주관식 변경 컴포넌트 */}
+                        {_typeContents}
+                    </Card.Text>
+                </Card.Body>
+            </Card>
+            <br />
             {/* hint/Enter */}
-            <div className="row" style={{display:"flex",alignItems:"right", justifyContent:"right",marginTop:"10px"}}>
+            <div className="row" style={{display:"flex",alignItems:"right", justifyContent:"right",marginTop:"10px",marginBottom:"35px"}}>
                 <Button variant={!isClick ? "outline-primary col-2" : "secondary col-2"} 
                     id={"dropdown-basic"+_qnaIndex} disabled={isClick}
                     onClick={!isLoading ? handleClick : handleClick}

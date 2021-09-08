@@ -27,7 +27,7 @@ const MultiTypeAnswerBox = (props) =>{
                 }
                 props.onClick([answerCheck, props.id, e.target.id]);
             }}/> 
-            <span id = "choicesLabel1">{props.choices[0]}</span>
+            <span id = "choicesLabel1">{"  " + props.choices[0]}</span>
         </label>
         <label>
             <input type="radio" value="2" name={_index} 
@@ -44,7 +44,7 @@ const MultiTypeAnswerBox = (props) =>{
                 }
                 props.onClick([answerCheck, props.id, e.target.id]);
             }}/> 
-            <span id = "choicesLabel2">{props.choices[1]}</span>
+            <span id = "choicesLabel2">{"  " + props.choices[1]}</span>
         </label>
         <label>
             <input type="radio" value="3" name={_index} 
@@ -61,7 +61,7 @@ const MultiTypeAnswerBox = (props) =>{
                 }
                 props.onClick([answerCheck, props.id, e.target.id]);
             }}/> 
-            <span id = "choicesLabel3">{props.choices[2]}</span>
+            <span id = "choicesLabel3">{"  " + props.choices[2]}</span>
         </label>
         <label>
             <input type="radio" value="4" name={_index} 
@@ -78,7 +78,7 @@ const MultiTypeAnswerBox = (props) =>{
                 }
                 props.onClick([answerCheck, props.id, e.target.id]);
             }}/>
-            <span id = "choicesLabel4">{props.choices[3]}</span>
+            <span id = "choicesLabel4">{"  " + props.choices[3]}</span>
         </label>
         
     </div>

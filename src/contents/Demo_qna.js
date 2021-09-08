@@ -11,12 +11,13 @@ export default class Demo_qna extends Component{
         return (
             <div className="container">
                 <Header title="Q&A"></Header>
+                <hr style={{borderWidth:"5px",borderStyle:"solid",borderColor:"black"}}/>
                 <Nav></Nav>
-                <h1>Q&A</h1>
+                <h1 style={{fontWeight:"bold"}}>Q&A</h1>
                 <ul>
-                    <li><b>Create the questions</b></li>
+                    <li className="h5"><b>Create the questions</b></li>
                 </ul>
-                <a>{_introQ}</a>
+                <p className="">{_introQ}</p>
                 <div className="row">
                     <QnaCreateQ></QnaCreateQ>
                 </div>

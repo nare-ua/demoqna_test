@@ -3,7 +3,7 @@ import InputTypeContents from "./typeContents/inputContentsType";
 import InputTypeContents2 from "./typeContents/inputContents2";
 import QnaAddRow from "./qnaAddRow";
 import axios from "axios";
-import { Button,Spinner } from "react-bootstrap";
+import { Button,ListGroup,Spinner } from "react-bootstrap";
 
 export default class QnaCreateQ extends Component{
     constructor(props){
@@ -181,12 +181,12 @@ export default class QnaCreateQ extends Component{
     makeQna = (jsonParams) => {
         let arr = [...jsonParams]
         let str = arr.map((questions, i)=>{
-            return <QnaAddRow questions={questions} index={i} onClick={(e) => this.isRight(e)}
+            return <ListGroup.Item><QnaAddRow questions={questions} index={i} onClick={(e) => this.isRight(e)}
             makeHints={(_hintFlag)=>this.makeHints(_hintFlag)} hintId={"hintF"+i}
             
-            /> 
+            /> </ListGroup.Item>
         })
-        return str;
+        return <ListGroup variant="flush">{str}</ListGroup>;
     }
 
     render(){
@@ -205,14 +205,15 @@ export default class QnaCreateQ extends Component{
                     <div className="row">
                         <label>
                             <input type="radio" name="text"
-                            value="inputText" defaultChecked
-                            onClick={(e) => this.inputType_onClick(e)}
-                            />Input Text
+                                value="inputText" defaultChecked
+                                onClick={(e) => this.inputType_onClick(e)}
+                            /><span className="m-2">Input Text</span>
                         </label>
                         <label>
                             <input type="radio" name="text"
-                            onClick={(e) => this.inputType_onClick(e)}
-                            value="URL" />Input URL
+                                onClick={(e) => this.inputType_onClick(e)}
+                                value="URL" 
+                            /><span className="m-2">Input URL</span>
                         </label>
                     </div><br/>
 
@@ -220,19 +221,20 @@ export default class QnaCreateQ extends Component{
                     
                     <br/>
                 <ul>
-                    <li><b>Select an answer type</b></li>
+                    <li className="h5"><b>Select an answer type</b></li>
                 </ul>
                     <div className="row">
                         <label>
                             <input type="radio" name="question_type"
-                            value="MULTIPLE_CHOICE" defaultChecked
-                            onClick={(e) => this.questionType_onClick(e)}
-                            />Multiple choice anwser
+                                value="MULTIPLE_CHOICE" defaultChecked
+                                onClick={(e) => this.questionType_onClick(e)}
+                            /><span className="m-2">Multiple choice anwser</span>
                         </label>
                         <label>
                             <input type="radio" name="question_type"
-                            onClick={(e) => this.questionType_onClick(e)}
-                            value="SHORT_ANSWER" />Short anwser
+                                onClick={(e) => this.questionType_onClick(e)}
+                                value="SHORT_ANSWER" 
+                            /><span className="m-2">Short anwser</span>
                         </label>
                     </div>
                     <div className="row" style={{display:"flex",alignItems:"right", justifyContent:"right"}}>

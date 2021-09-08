@@ -40,7 +40,7 @@ export default class InputTypeContents extends Component{
                 onChange={(e)=>this.fnByteLimitCheck(e)} 
                 
                 ></textarea>
-                <div className="row">
+                <div className="row mt-3">
                     <br/>
                     <sup><span id="nowByte" onChange={(e)=>this.fnByteLimitCheck(e)} 
                     style={{color:this.textColor}}>0</span>|10,000 bytes</sup>
