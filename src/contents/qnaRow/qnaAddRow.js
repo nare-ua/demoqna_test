@@ -92,7 +92,7 @@ const QnaAddRow = (props) => {
             {/* type에 따라 4지선다, 주관식 변경 컴포넌트 */}
             {_typeContents}
             {/* hint/Enter */}
-            <div className="row" style={{display:"flex",alignItems:"right", justifyContent:"right"}}>
+            <div className="row" style={{display:"flex",alignItems:"right", justifyContent:"right",marginTop:"10px"}}>
                 <Button variant={!isClick ? "outline-primary col-2" : "secondary col-2"} 
                     id={"dropdown-basic"+_qnaIndex} disabled={isClick}
                     onClick={!isLoading ? handleClick : handleClick}
@@ -121,17 +121,16 @@ const QnaAddRow = (props) => {
                     }
                 }}>Enter</Button>
             </div>
-            <Alert variant={!isCorrect ? "danger" : "success"} hidden={!isClick ? "hidden" : ""}>
+            <Alert variant={!isCorrect ? "danger" : "success"} style={{marginTop:"10px"}}
+            hidden={!isClick ? "hidden" : ""}>
                 <Alert.Heading>{correctText}</Alert.Heading>
+                <hr />
                 <p>{JSON.stringify(props.questions.hints)}</p>
             </Alert>
-            {/* <div className="row" style={{marginTop:"10px"}} hidden={!isClick ? "hidden" : ""}>
-                {correctText}
-                <input type="text" value={props.questions.hints}/>
-            </div> */}
-            <div className="row" style={{marginTop:"10px"}} hidden={!isLoading ? "hidden" : ""}>
-                <input type="text" value={props.questions.hints}/>
-            </div>
+            <Alert variant="secondary" style={{marginTop:"10px"}} hidden={!isLoading ? "hidden" : ""}>
+                <Alert.Heading>Hint!</Alert.Heading>
+                <p>{JSON.stringify(props.questions.hints)}</p>
+            </Alert>
         </div>
     );
     
