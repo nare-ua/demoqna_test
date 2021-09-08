@@ -125,11 +125,11 @@ const QnaAddRow = (props) => {
             hidden={!isClick ? "hidden" : ""}>
                 <Alert.Heading>{correctText}</Alert.Heading>
                 <hr />
-                <p>{JSON.stringify(props.questions.hints)}</p>
+                <p>{props.questions.hints}</p>
             </Alert>
             <Alert variant="secondary" style={{marginTop:"10px"}} hidden={!isLoading ? "hidden" : ""}>
                 <Alert.Heading>Hint!</Alert.Heading>
-                <p>{JSON.stringify(props.questions.hints)}</p>
+                <p>{props.questions.hints}</p>
             </Alert>
         </div>
     );
