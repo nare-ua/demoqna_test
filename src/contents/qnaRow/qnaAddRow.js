@@ -10,6 +10,7 @@ const QnaAddRow = (props) => {
     let _hrTag;
     let _answerChk;
     let _hintToggler = "hint"+_qnaIndex;
+    let _qnaIdx = "qnaAdd" + _qnaIndex;
     
     if (_qnaIndex == 1) {
         _hrTag = <hr style={{
@@ -25,6 +26,7 @@ const QnaAddRow = (props) => {
         case "MULTIPLE_CHOICE":
             _typeContents = <MultiTypeAnswerBox id={"Q"+_qnaIndex} choices={props.questions.choices} 
             index={_qnaIndex} answer = {props.questions.answer}
+            onKeyPress={(e) => {onKeyHandle(e)}}
             onClick={(e) => {
                 _answerChk = props.onClick(e);
             }}/>;
@@ -47,6 +49,10 @@ const QnaAddRow = (props) => {
         } else {
         }
     }, [isClick, isLoading]);
+
+    const onKeyHandle = (e) => {
+        document.getElementById(_qnaIdx).click();
+    }
     
     const handleEnterClick = (textValue, textBool, openComp) => {
         // textValue=> correct / incorrect
@@ -84,10 +90,10 @@ const QnaAddRow = (props) => {
         <div className="row" style={{marginTop:"10px"}}>
             {_hrTag}
             <Card border="primary" as="h1" style={{color:"black", textAlign:"left"}}> 
-                <Card.Header style={{fontSize:"1.3em"}}>Q{_qnaIndex}.</Card.Header>
+                <Card.Header style={{fontSize:"1.3em"}}>Q{_qnaIndex + " .  " + props.questions.question}</Card.Header>
                 <Card.Body>
-                    <Card.Title >{props.questions.question}</Card.Title>
-                    <Card.Subtitle className="m-2 text-muted">Answer :</Card.Subtitle>
+                    <Card.Title ></Card.Title>
+                    {/* <Card.Subtitle className="m-2 text-muted">Answer :</Card.Subtitle> */}
                     <Card.Text style={{fontSize:"1.5em",fontWeight:"400"}}>
                         {/* type에 따라 4지선다, 주관식 변경 컴포넌트 */}
                         {_typeContents}
@@ -101,21 +107,23 @@ const QnaAddRow = (props) => {
                     id={"dropdown-basic"+_qnaIndex} disabled={isClick}
                     onClick={!isLoading ? handleClick : handleClick}
                 >
-                    {isLoading ? 'hint▽' : 'hint△'}
+                    {isLoading ? 'Hint▽' : 'Hint△'}
                 </Button>
-                <Button variant="primary col-2" onClick={(e)=>{
+                <Button variant="primary col-2"
+                id = {_qnaIdx}
+                onClick={(e)=>{
                     if (_answerChk) {
                         if (!correctText) {
                             if (_answerChk[0]) {
-                                handleEnterClick("correct!", true, true);
+                                handleEnterClick("Correct!", true, true);
                             }  else {
-                                handleEnterClick("incorrect...", false, true);
+                                handleEnterClick("Incorrect...", false, true);
                             }
                         } else {
                             if (_answerChk[0]) {
-                                handleEnterClick("correct!", true, true);
+                                handleEnterClick("Correct!", true, true);
                             }  else {
-                                handleEnterClick("incorrect...", false, true);
+                                handleEnterClick("Incorrect...", false, true);
                             }
                         }
                     }else{

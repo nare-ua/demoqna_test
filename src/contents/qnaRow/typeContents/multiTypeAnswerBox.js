@@ -7,6 +7,11 @@ const MultiTypeAnswerBox = (props) =>{
         <label>
             <input type="radio" value="1" name={_index} 
                 id = {props.id + "radio1"}
+                onKeyPress = {(e) => {
+                    if (e.key === "Enter") {
+                        props.onKeyPress();
+                    }
+                }}
                 onClick={(e) => {
                     let answerCheck;
                     if (e.target.value == props.answer) {
@@ -21,6 +26,11 @@ const MultiTypeAnswerBox = (props) =>{
         <label>
             <input type="radio" value="2" name={_index} 
             id = {props.id + "radio2"}
+            onKeyPress = {(e) => {
+                if (e.key === "Enter") {
+                    props.onKeyPress();
+                }
+            }}
             onClick={(e) => {
                 let answerCheck;
                 if (e.target.value == props.answer) {
@@ -35,6 +45,11 @@ const MultiTypeAnswerBox = (props) =>{
         <label>
             <input type="radio" value="3" name={_index} 
             id = {props.id + "radio3"}
+            onKeyPress = {(e) => {
+                if (e.key === "Enter") {
+                    props.onKeyPress();
+                }
+            }}
             onClick={(e) => {
                 let answerCheck;
                 if (e.target.value == props.answer) {
@@ -49,6 +64,11 @@ const MultiTypeAnswerBox = (props) =>{
         <label>
             <input type="radio" value="4" name={_index} 
             id = {props.id + "radio4"}
+            onKeyPress = {(e) => {
+                if (e.key === "Enter") {
+                    props.onKeyPress();
+                }
+            }}
             onClick={(e) => {
                 let answerCheck;
                 if (e.target.value == props.answer) {

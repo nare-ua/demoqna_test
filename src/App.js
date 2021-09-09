@@ -1,15 +1,21 @@
 import { Component } from "react"
+import Header from './components/Body/Header'
+import Navi from './components/Nav/Navi'
 import { Route } from "react-router-dom"
 import { Home,Demo_qna } from "./components/Body/index.js"
 
-export default class App extends Component{
+const App = () => {
 
-  render(){
+  
     return(
       <div className="container">
-        <Route exact path="/" component={Home}></Route>
-        <Route exact path="/demoQna" component={Demo_qna}></Route>
+        <Header title="NLP" />
+        <Navi />
+        {/* <Route exact path="/" component={Home} />
+        <Route path="/demoQna" component={Demo_qna} /> */}
       </div>
     )
-  }
+  
 }
+
+export default App;

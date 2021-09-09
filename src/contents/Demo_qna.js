@@ -1,6 +1,4 @@
 import { Component } from "react";
-import Header from "../components/Body/Header";
-import { Nav } from "../components/Nav";
 import QnaCreateQ from "./qnaRow/qnaCreateQ";
 
 export default class Demo_qna extends Component{
@@ -10,9 +8,6 @@ export default class Demo_qna extends Component{
         let _introQ = "Paste the text of the article or URL you want to make questions. The longer article entered, the more questions you can create.";
         return (
             <div className="container">
-                <Header title="Q&A"></Header>
-                <hr style={{borderWidth:"5px",borderStyle:"solid",borderColor:"black"}}/>
-                <Nav></Nav>
                 <h1 style={{fontWeight:"bold"}}>Q&A</h1>
                 <ul>
                     <li className="h5"><b>Create the questions</b></li>

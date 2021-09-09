@@ -8,6 +8,7 @@ const Header=({title})=>{
             &nbsp;&nbsp;&nbsp;&nbsp;
             <span style={{color:'#FF2F92'}}>*</span>
             <span style={{color:'#0096FF'}}>{title} DEMO</span>
+            <hr style={{border:'black solid 5px'}}/>
         </p>
         </header>
     )
