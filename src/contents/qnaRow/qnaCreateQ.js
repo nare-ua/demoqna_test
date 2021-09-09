@@ -1,4 +1,4 @@
-import { Component,useState } from "react";
+import { Component } from "react";
 import InputTypeContents from "./typeContents/inputContentsType";
 import InputTypeContents2 from "./typeContents/inputContents2";
 import QnaAddRow from "./qnaAddRow";
@@ -35,14 +35,6 @@ export default class QnaCreateQ extends Component{
                 {idxQ:0,question_type:"MULTIPLE_CHOICE", text:"",},
             ],
             getQuestion:[
-                // {
-                //     // idxA:1, 
-                //     question_type:"", 
-                //     question:"", 
-                //     choices:["","","",""], 
-                //     answer:"",
-                //     short_answer:"",
-                // },
             ],
             hintsReq:[
                 {text:"", questions:[""]}
@@ -67,7 +59,7 @@ export default class QnaCreateQ extends Component{
             btnCtr:this.state.loadingBtn,
         })
         // console.log("params-type :", params.question_type);
-        let url="http://211.248.186.164:18112/questions";
+        let url="http://211.248.186.164:18111/questions";
         axios.post(url, {
             question_type: params.question_type,
             text: params.text
@@ -83,7 +75,7 @@ export default class QnaCreateQ extends Component{
             let leng = res.data.questions.length;
             console.log("response:", res);
             console.log("question1:",res.data.questions[0].question);
-            const qrr = [];
+            // const qrr = [];
             if (leng > 0) {//받아온 질문이 있는경우
                 
                 this.setState({
@@ -92,8 +84,6 @@ export default class QnaCreateQ extends Component{
             } else {
                 //받아온 질문이 없는경우
             }
-            
-            
         })
         .catch((err)=>{
             if (err.response) {
@@ -106,7 +96,6 @@ export default class QnaCreateQ extends Component{
             } else {
                 // 기타 에러
                 console.log("err.message:::", err.message);
-
             }
         })
         .finally(()=>{
@@ -161,7 +150,7 @@ export default class QnaCreateQ extends Component{
     createQuestion = (e) => {
         // console.log("QNACreate:::", document.getElementById("textArea_byteLimit").value)
         let checkValue = document.getElementById("textArea_byteLimit").value;
-        if (checkValue.trim()=="") {
+        if (checkValue.trim()==="") {
             alert("Please enter your text.");
             return;
         } else if (checkValue.length < 10) {
@@ -174,14 +163,18 @@ export default class QnaCreateQ extends Component{
             this.requestAPI(_arr);//getQuestion 값 셋팅
         }
     }
+
     isRight = (rtnValue) => {
+        // 정답을 클릭했을 때 값 전달.
         console.log("right:", rtnValue);
         return rtnValue;
     }
+
     makeQna = (jsonParams) => {
         let arr = [...jsonParams]
         let str = arr.map((questions, i)=>{
-            return <ListGroup.Item><QnaAddRow questions={questions} index={i} onClick={(e) => this.isRight(e)}
+            return <ListGroup.Item><QnaAddRow questions={questions} index={i} 
+            onClick={(e) => this.isRight(e)}
             makeHints={(_hintFlag)=>this.makeHints(_hintFlag)} hintId={"hintF"+i}
             
             /> </ListGroup.Item>
