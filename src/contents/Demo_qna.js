@@ -5,14 +5,15 @@ export default class Demo_qna extends Component{
     
     
     render(){
-        let _introQ = "Paste the text of the article or URL you want to make questions. The longer article entered, the more questions you can create.";
+        let _introQ = "Copy and paste the text of the article you want to make questions."; 
+        let _introQ2 = "The longer article you enters, the more questions you can create.";
         return (
             <div className="container">
                 <h1 style={{fontWeight:"bold"}}>Q&A</h1>
                 <ul>
-                    <li className="h5"><b>Create the questions</b></li>
+                    <li className="h5"><b>AILA will create the questions using the text you enter.</b></li>
                 </ul>
-                <p className="">{_introQ}</p>
+                <p className="">{_introQ}<br/>{_introQ2}</p>
                 <div className="row">
                     <QnaCreateQ></QnaCreateQ>
                 </div>

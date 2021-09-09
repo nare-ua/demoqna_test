@@ -32,10 +32,10 @@ render(){
                     <Nav.Link href="/">Home</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="EnRec">Entity recognition</Nav.Link>
+                    <Nav.Link eventKey="EnRec">Entity Recognition</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="InCla">Intent classification</Nav.Link>
+                    <Nav.Link eventKey="InCla">Intent Cassification</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                     <Nav.Link eventKey="Chat">Chatbot</Nav.Link>
@@ -44,10 +44,10 @@ render(){
                     <Nav.Link eventKey="Chit">ChitChat</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="AILA">AILA<sub>TM</sub></Nav.Link>
+                    <Nav.Link eventKey="AILA">AILA<sup>TM</sup></Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link eventKey="demoQna">Q&A demo</Nav.Link>
+                    <Nav.Link eventKey="demoQna">Q&A Demo</Nav.Link>
                 </Nav.Item>
             </Nav>
             {_pages}

@@ -197,24 +197,25 @@ export default class QnaCreateQ extends Component{
                     
                     <div className="row">
                         <label>
-                            <input type="radio" name="text"
+                            {/* <input type="radio" name="text"
                                 value="inputText" defaultChecked
                                 onClick={(e) => this.inputType_onClick(e)}
-                            /><span className="m-2">Input Text</span>
+                            /> */}
+                            <span className="m-2">Input Text</span>
                         </label>
-                        <label>
+                        {/* <label>
                             <input type="radio" name="text"
                                 onClick={(e) => this.inputType_onClick(e)}
                                 value="URL" 
                             /><span className="m-2">Input URL</span>
-                        </label>
+                        </label> */}
                     </div><br/>
 
                     {_content}
                     
                     <br/>
                 <ul>
-                    <li className="h5"><b>Select an answer type</b></li>
+                    <li className="h5"><b>Select Answer Type</b></li>
                 </ul>
                     <div className="row">
                         <label>
