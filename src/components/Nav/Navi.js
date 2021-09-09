@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import Home from '../Body/Home';
 import DemoQna from '../../contents/Demo_qna';
+import style from '../Body/css/App.module.css';
 
 export default class Navi extends Component{
     constructor(props){
@@ -14,7 +15,7 @@ export default class Navi extends Component{
 render(){
     let _pages = this.state.page;
     return(
-        <Container>
+        <Container className={style.navis}>
             <Nav variant="pills" defaultActiveKey="/"
                 onSelect={(selectedKey) =>{
                     if (selectedKey === "/") {

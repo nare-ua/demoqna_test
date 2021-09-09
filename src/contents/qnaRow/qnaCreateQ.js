@@ -3,7 +3,7 @@ import InputTypeContents from "./typeContents/inputContentsType";
 import InputTypeContents2 from "./typeContents/inputContents2";
 import QnaAddRow from "./qnaAddRow";
 import axios from "axios";
-import { Button,ListGroup,Spinner } from "react-bootstrap";
+import { Alert, Button,ListGroup,Spinner } from "react-bootstrap";
 
 export default class QnaCreateQ extends Component{
     constructor(props){
@@ -16,6 +16,12 @@ export default class QnaCreateQ extends Component{
             questionRadioValue: "MULTIPLE_CHOICE",
             mode: "inputTEXT",
             typeInput:<InputTypeContents />,
+            loadingPage:<Alert variant="outline-primary">
+                <p>
+                    <Spinner animation="grow" variant="primary" />
+                    Creating...
+                </p>
+            </Alert>,
             loadingBtn:<Button variant="primary" disabled>
             <Spinner
               as="span"
@@ -56,7 +62,9 @@ export default class QnaCreateQ extends Component{
         console.log("params :", params.text);
         // this.state.btnCtr = this.state.loadingBtn;
         this.setState({
+            answerTypeContents:this.state.loadingPage,
             btnCtr:this.state.loadingBtn,
+            getQuestion:"",
         })
         // console.log("params-type :", params.question_type);
         let url="http://211.248.186.164:18111/questions";
@@ -79,6 +87,7 @@ export default class QnaCreateQ extends Component{
             if (leng > 0) {//받아온 질문이 있는경우
                 
                 this.setState({
+                    answerTypeContents:"",
                     getQuestion:res.data.questions,
                 })
             } else {
@@ -171,8 +180,8 @@ export default class QnaCreateQ extends Component{
     }
 
     makeQna = (jsonParams) => {
-        let arr = [...jsonParams]
-        let str = arr.map((questions, i)=>{
+        let _arr = [...jsonParams]
+        let str = _arr.map((questions, i)=>{
             return <ListGroup.Item><QnaAddRow questions={questions} index={i} 
             onClick={(e) => this.isRight(e)}
             makeHints={(_hintFlag)=>this.makeHints(_hintFlag)} hintId={"hintF"+i}
@@ -185,7 +194,8 @@ export default class QnaCreateQ extends Component{
     render(){
         let _content=this.state.typeInput;
         //answerContent에 컴포넌트 생성 및 map()사용
-        let _answerContent = this.state.answerTypeContents;
+        let _answerContent = "";
+        _answerContent = this.state.answerTypeContents;
         
         console.log("test", this.state.getQuestion);
         if (this.state.getQuestion.length > 0) {

@@ -11,8 +11,6 @@ const App = () => {
       <div className="container">
         <Header title="NLP" />
         <Navi />
-        {/* <Route exact path="/" component={Home} />
-        <Route path="/demoQna" component={Demo_qna} /> */}
       </div>
     )
   

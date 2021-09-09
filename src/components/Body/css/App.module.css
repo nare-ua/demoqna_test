@@ -24,3 +24,16 @@
   .a {
     color: black;
   }
+.navis {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  font-family: 'Aero';
+}
+.qnas {
+  align-items: left;
+  font-family: 'Aero';
+  padding-top: 30px;
+}
