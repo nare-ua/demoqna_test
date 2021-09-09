@@ -211,7 +211,7 @@ export default class QnaCreateQ extends Component{
                                 value="inputText" defaultChecked
                                 onClick={(e) => this.inputType_onClick(e)}
                             /> */}
-                            <span className="m-2">Input Text</span>
+                            <span className="m-2"><b>Input Text ▼</b></span>
                         </label>
                         {/* <label>
                             <input type="radio" name="text"

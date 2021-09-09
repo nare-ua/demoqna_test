@@ -17,6 +17,7 @@ render(){
     return(
         <Container className={style.navis}>
             <Nav variant="pills" defaultActiveKey="/"
+            style={{marginBottom:"36px"}}
                 onSelect={(selectedKey) =>{
                     if (selectedKey === "/") {
                         this.setState({
