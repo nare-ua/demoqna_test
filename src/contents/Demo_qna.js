@@ -11,7 +11,7 @@ export default class Demo_qna extends Component{
         let _introQ2 = "The longer article you enters, the more questions you can create.";
         return (
             <Container className={style.qnas} className="col-10">
-                <h1 style={{fontWeight:"bold"}}>Q&A</h1>
+                <h1 style={{fontWeight:"bold"}}>Learning by Questions (질문학습)</h1>
                 <ul>
                     <li className="h5"><b>AILA will create the questions using the text you enter.</b></li>
                 </ul>

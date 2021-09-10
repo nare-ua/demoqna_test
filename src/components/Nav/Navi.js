@@ -4,6 +4,7 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import Home from '../Body/Home';
 import DemoQna from '../../contents/Demo_qna';
 import style from '../Body/css/App.module.css';
+import { Helmet } from 'react-helmet';
 
 export default class Navi extends Component{
     constructor(props){
@@ -18,6 +19,9 @@ render(){
     let _breandTitle = this.state.brandtitle;
     return(
         <Container>
+            <Helmet>
+                <title>{this.state.brandtitle}</title>
+            </Helmet>
             <Container className={style.navis}>
                 <Navbar collapseOnSelect expand="xl">
                     <Navbar.Brand href="/demoQna" className={style.navTitle}>{_breandTitle}</Navbar.Brand>
