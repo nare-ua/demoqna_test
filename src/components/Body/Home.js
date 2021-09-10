@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom'
 
-const Home=()=>{
+const Home=(props)=>{
     return(
         <div className="container p-4 text-center">
-            <h1>Home</h1>
-            <Link to="http://211.248.186.164:13300/">http://211.248.186.164:13300/</Link>
+            <Link onClick={() => {
+                let linkUrl = props.go;
+                window.open(linkUrl, "_blank");
+            }}><h1>Home</h1></Link>
         </div>
     )
 }
