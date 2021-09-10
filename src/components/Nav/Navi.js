@@ -17,12 +17,12 @@ render(){
     return(
         <Container>
             <Container className={style.navis}>
-                <Navbar collapseOnSelect expand="lg">
+                <Navbar collapseOnSelect expand="xl">
                     <Navbar.Brand href="/" className={style.navTitle}>UNITED ASSOCIATES</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav variant="pills" defaultActiveKey="/" className="mr-auto my-2 my-lg-0"
-                            style={{ maxHeight: '100px', marginBottom:"36px"}}
+                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+                    <Navbar.Collapse id="basic-navbar-nav" >
+                        <Nav variant="pills" defaultActiveKey="/" className="me-auto my-2 my-lg-0"
+                            style={{ marginBottom:"36px"}}
                             onSelect={(selectedKey) =>{
                                 if (selectedKey === "/") {
                                     this.setState({
@@ -57,7 +57,9 @@ render(){
                     </Navbar.Collapse>
                 </Navbar>
             </Container>
+            <Container>
                 {_pages}
+            </Container>
         </Container>
         
     )    

@@ -10,11 +10,40 @@
   }
   .title {
     color: black;
-    font-size: 55px;
+    /* font-size: 55px; */
     line-height: 1em;
     margin: 0;
     font-family: 'Aero';
   }
+@media (min-width:1201px) {
+  .titleName {
+    font-size: 55px;
+  }
+  .titleSub {
+    font-size: 55px;
+  }
+
+}
+@media (min-width:769px) and (max-width:1200px) {
+  .titleName {
+    font-size: 42px;
+  }
+  .titleSub {
+    font-size: 20px;
+  }
+  .togs {
+    justify-content: end;
+  }
+}
+@media (max-width:768px) {
+  .titleName {
+    font-size: 30px;
+    text-align: center;
+  }
+  .titleSub {
+    display: none;
+  }
+}
   .blue {
     color: #0069b4;
   }

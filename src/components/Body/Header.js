@@ -5,13 +5,12 @@ const Header=({title})=>{
         <header className={style.header}>
         <p className={style.title}>
             <Row>
-                <Col xs lg="auto">
+                <Col className={style.titleName}>
                     <span style={{color:'#282B67'}}>UNITED ASSOCIATES</span>
-                </Col>
-                <Col>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span style={{color:'#FF2F92'}}>*</span>
-                    <span style={{color:'#0096FF'}}>{title} DEMO</span>
+                    <span className={style.titleSub} style={{color:'#FF2F92'}}>*</span>
+                    <span className={style.titleSub} style={{color:'#0096FF'}}>{title} DEMO</span>
+                
                 </Col>
             </Row>
             <hr style={{border:'black solid 5px'}}/>
