@@ -19,7 +19,7 @@ export default class InputTypeContents extends Component{
             }
         }
         const getNowByte = document.getElementById("nowByte");
-        const getStyle = getNowByte.getAttribute("style");
+        // const getStyle = getNowByte.getAttribute("style");
         if (totalByte > maxByte) {
             getNowByte.innerText = totalByte;
             changeColor = "red";

@@ -3,7 +3,7 @@ import InputTypeContents from "./typeContents/inputContentsType";
 import InputTypeContents2 from "./typeContents/inputContents2";
 import QnaAddRow from "./qnaAddRow";
 import axios from "axios";
-import { Alert, Button,Col,ListGroup,Spinner } from "react-bootstrap";
+import { Alert, Button,ListGroup,Spinner } from "react-bootstrap";
 
 export default class QnaCreateQ extends Component{
     constructor(props){
