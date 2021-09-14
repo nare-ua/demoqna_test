@@ -59,7 +59,7 @@ export default class QnaCreateQ extends Component{
     }
     //통신 method
     requestAPI = (params) => {
-        console.log("params :", params.text);
+        // console.log("params :", params.text);
         // this.state.btnCtr = this.state.loadingBtn;
         this.setState({
             answerTypeContents:this.state.loadingPage,
@@ -79,10 +79,10 @@ export default class QnaCreateQ extends Component{
             }
         })
         .then((res)=>{
-            console.log("LEN:", res.data.questions.length);//질문 갯수
+            // console.log("LEN:", res.data.questions.length);//질문 갯수
             let leng = res.data.questions.length;
-            console.log("response:", res);
-            console.log("question1:",res.data.questions[0].question);
+            // console.log("response:", res);
+            // console.log("question1:",res.data.questions[0].question);
             // const qrr = [];
             if (leng > 0) {//받아온 질문이 있는경우
                 
@@ -121,7 +121,7 @@ export default class QnaCreateQ extends Component{
     }
     // qna add row event 
     makeHints = (_hintFlag) => {
-        console.log("makeHints::", _hintFlag)
+        // console.log("makeHints::", _hintFlag)
         if (_hintFlag) {
             return false;
         } else {
@@ -148,7 +148,7 @@ export default class QnaCreateQ extends Component{
 
     questionType_onClick = (e) =>{
         let typeValue = e.target.value;
-        console.log("qnaCreateQ :", typeValue);
+        // console.log("qnaCreateQ :", typeValue);
         
         this.setState({
             questionRadioValue: typeValue,
@@ -175,7 +175,7 @@ export default class QnaCreateQ extends Component{
 
     isRight = (rtnValue) => {
         // 정답을 클릭했을 때 값 전달.
-        console.log("right:", rtnValue);
+        // console.log("right:", rtnValue);
         return rtnValue;
     }
 

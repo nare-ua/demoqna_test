@@ -53,36 +53,37 @@ export default class CreateDialog extends Component{
         }
         console.log("result::", rtnVals)
         return rtnVals;
-        // return {"Original":test2[1][0], "SAE":test2[1][1]}
     }
     // 통신 method
     requestAPI = (params) => {
         console.log("requestAPI params ::", params);
-        // let test = "i don't know. Original:i don know. Standard American English:i don't know. Original:i don know. Standard American English:i don't know. Original:i don know. Standard American English:i don't know.";
         this.setState({
             btnUI:this.state.loeadingBtn,
         })
 
         // 주소는 고정
-        let url = "http://211.248.186.164:18111/docs#/passthru/";
+        let url = "http://211.248.186.164:18111/docs#/passthru";
         // 셋팅할 데이타 초기값
         let _prompt = "Original:" + params + "\nStandard American English:";
-        let _temperature = "";
-        let _max_tokens = 0;
-        let _top_p = 0;
+        let _temperature = 0;
+        let _max_tokens = 60;
+        let _top_p = 1.0;
         let _frequency_penalty = 0.0;
-        let _presence_penalty = 0.0;
-        let _stop = "";
+        let _presence_penalty = 0.6;
+        let _stop = '["\n"]';
+        let _engine = "davinci";
         
         axios.post(url, {
-                engine : "davinci",
-                prompt : _prompt,
-                temperature : 0,
-                max_tokens : 60,
-                top_p : 1.0,
-                frequency_penalty : 0.0,
-                presence_penalty : 0.6,
-                stop : '["\n"]',
+            params:{
+                "engine"              : _engine,
+                "prompt"              : _prompt,
+                "temperature"         : _temperature,
+                "max_tokens"          : _max_tokens,
+                "top_p"               : _top_p,
+                "frequency_penalty"   : _frequency_penalty,
+                "presence_penalty"    : _presence_penalty,
+                "stop"                : _stop,
+            },
         }, {
             headers:{
                 "Content-Type": "application/json",

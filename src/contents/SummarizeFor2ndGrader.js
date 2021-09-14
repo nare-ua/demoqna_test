@@ -36,7 +36,7 @@ export default class SummarizeFor2ndGrader extends Component{
             this.setState({summarizeInputColor:"red"})
             return;
         }
-        console.log("requestAPI Summarize ::", params);
+        // console.log("requestAPI Summarize ::", params);
         this.setState({
             btnUI:this.state.loadingBtn, 
         })
@@ -69,7 +69,7 @@ export default class SummarizeFor2ndGrader extends Component{
             }
         })
         .then((res) => {
-            console.log("APIresult ::", res.data.choices[0].text);
+            // console.log("APIresult ::", res.data.choices[0].text);
             let rtnText = res.data.choices[0].text;
             //SummarizeAPIText
             this.setState({
