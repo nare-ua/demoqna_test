@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { ButtonGroup, Container, DropdownButton, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import Home from '../Body/Home';
 import DemoQna from '../../contents/Demo_qna';
 import CreateDialog from '../../contents/CreateDialog';
@@ -81,32 +81,26 @@ render(){
                             }}
                         >
                             <Nav.Item>
-                                <Nav.Link eventKey="Text QA">Text QA</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link eventKey="Entity Recognition">Entity Recognition</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link eventKey="Intent Cassification">Intent Cassification</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link eventKey="Chatbot">Chatbot</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link eventKey="Chit">ChitChat</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
                                 <Nav.Link eventKey="AILA">AILA<sup>TM</sup></Nav.Link>
                             </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link eventKey="LBQ-질문학습">LBQ-질문학습</Nav.Link>
                             </Nav.Item>
-                            {/* <Nav.Item>
+                            <Nav.Item>
                                 <Nav.Link eventKey="Grammar Correction">Grammar Correction</Nav.Link>
-                            </Nav.Item> */}
+                            </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link eventKey="Summary for Kids">Summary for Kids</Nav.Link>
                             </Nav.Item>
+                            <NavDropdown title="Menu" id="nav-dropdown">
+                                <NavDropdown.Item eventKey="AILA">AILA<sup>TM</sup></NavDropdown.Item>
+                                <NavDropdown.Divider />
+                                <NavDropdown.Item eventKey="Text QA">Text QA</NavDropdown.Item>
+                                <NavDropdown.Item eventKey="Entity Recognition">Entity Recognition</NavDropdown.Item>
+                                <NavDropdown.Item eventKey="Intent Cassification">Intent Cassification</NavDropdown.Item>
+                                <NavDropdown.Item eventKey="Chatbot">Chatbot</NavDropdown.Item>
+                                <NavDropdown.Item eventKey="Chit">ChitChat</NavDropdown.Item>
+                            </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>

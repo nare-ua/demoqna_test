@@ -62,7 +62,7 @@ export default class CreateDialog extends Component{
         })
 
         // 주소는 고정
-        let url = "http://211.248.186.164:18111/docs#/passthru";
+        let url = "http://211.248.186.164:18111/passthru";
         // 셋팅할 데이타 초기값
         let _prompt = "Original:" + params + "\nStandard American English:";
         let _temperature = 0;

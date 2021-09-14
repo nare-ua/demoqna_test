@@ -47,7 +47,7 @@ export default class SummarizeFor2ndGrader extends Component{
         let _prompt = "My second grader asked me what this passage means:\n\"\"\"\n" + this.state.summarizeInputText + "\n\"\"\"\nI rephrased it for him, in plain language a second grader can understand:\n\"\"\"\n";
         let _temperature = 0;
         let _top_p = 1.0;
-        let _max_tokens = 80;
+        let _max_tokens = 200;
         let _frequency_penalty = 0.0;
         let _presence_penalty = 0.0;
         let _stop = '["\"\"\""]';
