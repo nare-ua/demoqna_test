@@ -64,7 +64,7 @@ export default class CreateDialog extends Component{
         // 주소는 고정
         let url = "http://211.248.186.164:18111/passthru";
         // 셋팅할 데이타 초기값
-        let _prompt = "Original:" + params + "\nStandard American English:";
+        let _prompt = "Original:i child.\nStandard American English:I am a child.\nOriginal:She no went to the market.\nStandard American English:She didn't go to the market.\nOriginal:i am not speak English.\nStandard American English:I don't speak English.\nOriginal:" + params + "\nStandard American English:";
         let _temperature = 0;
         let _max_tokens = 60;
         let _top_p = 1.0;
