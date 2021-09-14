@@ -4,6 +4,7 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import Home from '../Body/Home';
 import DemoQna from '../../contents/Demo_qna';
 import CreateDialog from '../../contents/CreateDialog';
+import SummarizeFor2ndGrader from '../../contents/SummarizeFor2ndGrader';
 import style from '../Body/css/App.module.css';
 import { Helmet } from 'react-helmet';
 
@@ -71,6 +72,11 @@ render(){
                                         brandtitle:selectedKey,
                                         page:<CreateDialog />,
                                     })
+                                } else if (selectedKey === "Summary for Kids") {
+                                    this.setState({
+                                        brandtitle:selectedKey,
+                                        page:<SummarizeFor2ndGrader />,
+                                    })
                                 }
                             }}
                         >
@@ -95,8 +101,11 @@ render(){
                             <Nav.Item>
                                 <Nav.Link eventKey="LBQ-질문학습">LBQ-질문학습</Nav.Link>
                             </Nav.Item>
-                            <Nav.Item>
+                            {/* <Nav.Item>
                                 <Nav.Link eventKey="Grammar Correction">Grammar Correction</Nav.Link>
+                            </Nav.Item> */}
+                            <Nav.Item>
+                                <Nav.Link eventKey="Summary for Kids">Summary for Kids</Nav.Link>
                             </Nav.Item>
                         </Nav>
                     </Navbar.Collapse>

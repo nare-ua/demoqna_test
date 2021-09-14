@@ -64,7 +64,7 @@ export default class CreateDialog extends Component{
         })
 
         // 주소는 고정
-        let url = "https://api.openai.com/v1/engines/davinci/completions";
+        let url = "http://211.248.186.164:18111/docs#/passthru/";
         // 셋팅할 데이타 초기값
         let _prompt = "Original:" + params + "\nStandard American English:";
         let _temperature = "";
@@ -75,6 +75,7 @@ export default class CreateDialog extends Component{
         let _stop = "";
         
         axios.post(url, {
+                engine : "davinci",
                 prompt : _prompt,
                 temperature : 0,
                 max_tokens : 60,
