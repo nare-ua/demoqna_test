@@ -81,9 +81,9 @@ export default class SummarizeFor2ndGrader extends Component{
         .then((res) => {
             // console.log("APIresult ::", res.data.choices[0].text);
             let rtnText = res.data.choices[0].text;
-            let _lastStr = rtnText.slice(-1);
-            let _splitStr = "";
-            console.log("lastStr::", _lastStr)
+            // let _lastStr = rtnText.slice(-1);
+            // let _splitStr = "";
+            // console.log("lastStr::", _lastStr)
             this.setState({
                 summarizeResult:<SummarizeAPIText text={rtnText} />,
             })
@@ -175,10 +175,8 @@ export default class SummarizeFor2ndGrader extends Component{
                 <Row>
                     <Col>
                         <InputGroup className="d-grid gap-2 mb-4">
-
                             <FloatingLabel id="summarizeInput" label="">
                             <FormControl as="textarea" style={{ height: "200px", borderColor: this.state.summarizeInputColor}}
-                                
                                 onChange = {(e) => this.summarizeInputStr(e)}
                                 type="textarea" placeholder="Please write here~"
                                 aria-label="Please write here~"
