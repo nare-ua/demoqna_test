@@ -1,7 +1,7 @@
 import zIndex from "@material-ui/core/styles/zIndex";
 import CommonAlert from "../components/commonComponentModules/CommonMSG";
 import React, { Component } from "react";
-import { Col, Container, InputGroup, Row, Button, Spinner, FormControl, FloatingLabel  } from "react-bootstrap";
+import { Col, Container, InputGroup, Row, Button, Spinner, FormControl, FloatingLabel, Badge  } from "react-bootstrap";
 import axios from "axios";
 import style from "../components/Body/css/App.module.css";
 import { SummarizeAPIText } from "./ApiRow";
@@ -10,12 +10,14 @@ export default class SummarizeFor2ndGrader extends Component{
     constructor(props) {
         super(props);
         this.state = {
+            btnFlag:false,
+            badgeColors:"danger",
+            summarizeInputLength:0,
             summarizeLengthCheck:"Please write Summarize.",
             summarizeInputColor:"black",
             summarizeResult:"",
             summarizeInputText:"",
-            btnUI:<Button className="primary" size="lg"
-                onClick = {(e) => this.requestAPI(this.state.summarizeInputText)}
+            btnUI:<Button className="primary" size="lg" disabled
             >Enter</Button>,
             loadingBtn:
             <Button variant="primary" disabled>
@@ -26,6 +28,8 @@ export default class SummarizeFor2ndGrader extends Component{
             <Button className="primary" size="lg"
                 onClick = {(e) => this.requestAPI(this.state.summarizeInputText)}
             >Enter</Button>,
+            disableBtn:<Button className="primary" size="lg" disabled
+            >Enter</Button>,
         }
     }
     
@@ -33,6 +37,11 @@ export default class SummarizeFor2ndGrader extends Component{
         if (this.state.summarizeInputText == "") {
             // alert(this.state.summarizeLengthCheck);
             this.setState({summarizeInputColor:"red"})
+            return;
+        }
+        if (this.state.summarizeInputLength > 1100) {
+            // console.log(this.state.summarizeInputLength)
+            this.setState({summarizeLengthCheck:"too long your text."})
             return;
         }
         // console.log("requestAPI Summarize ::", params);
@@ -43,7 +52,7 @@ export default class SummarizeFor2ndGrader extends Component{
         // 값 셋팅
         let _url = "http://211.248.186.164:18111/passthru";
         let _engine = "davinci";
-        let _prompt = "My second grader asked me what this passage means:\n\"\"\"\n" + this.state.summarizeInputText + "\n\"\"\"\nI rephrased it for him, in plain language a second grader can understand:\n\"\"\"\n";
+        let _prompt = "My second grader asked me what this passage means:\n\"\"\"\n" + this.state.summarizeInputText + "\n\"\"\"\nI rephrased this for him, in plain language a second grader can understand:\n\"\"\"\n";
         let _temperature = 0.5;
         let _top_p = 1.0;
         let _max_tokens = 100;
@@ -75,16 +84,9 @@ export default class SummarizeFor2ndGrader extends Component{
             let _lastStr = rtnText.slice(-1);
             let _splitStr = "";
             console.log("lastStr::", _lastStr)
-            // if (_lastStr === ".") {
-                //SummarizeAPIText
-                this.setState({
-                    summarizeResult:<SummarizeAPIText text={rtnText} />,
-                })
-            // } else {
-            //     _splitStr = rtnText.split(".");
-            //     console.log("split::")
-                
-            // }
+            this.setState({
+                summarizeResult:<SummarizeAPIText text={rtnText} />,
+            })
         })
         .catch((err) => {
             if (err.response) {
@@ -109,18 +111,47 @@ export default class SummarizeFor2ndGrader extends Component{
     summarizeInputStr = (e) => {
         console.log(e.target.value.length);
         let _inputLen = e.target.value.trim().length;
-        if (_inputLen > 0) {
-            this.setState({
-                summarizeInputText:e.target.value,
-                summarizeInputColor:"#00cc00",
-                summarizeLengthCheck:""
-            })    
+        let _textLen = e.target.value.length;
+        if (_textLen > 0) {
+            if (_inputLen > 0) {
+                if (_textLen > 1100) {
+                    this.setState({
+                        summarizeInputText:e.target.value,
+                        summarizeInputLength:e.target.value.length,
+                        summarizeInputColor:"red",
+                        badgeColors:"danger",
+                        summarizeLengthCheck:"too long your text.",
+                        btnUI:this.state.disableBtn,
+                    })
+                } else {
+                    this.setState({
+                        summarizeInputText:e.target.value,
+                        summarizeInputLength:e.target.value.length,
+                        summarizeInputColor:"#00cc00",
+                        summarizeLengthCheck:"",
+                        btnUI:this.state.defaultBtn,
+                    })    
+                }
+            } else {
+                this.setState({
+                    summarizeInputText:e.target.value,
+                    summarizeInputLength:e.target.value.length,
+                    summarizeInputColor:"red",
+                    badgeColors:"danger",
+                    summarizeLengthCheck:"Please write Summarize.",
+                    btnUI:this.state.disableBtn,
+                })
+            }
         } else {
             this.setState({
                 summarizeInputText:e.target.value,
+                summarizeInputLength:e.target.value.length,
                 summarizeInputColor:"red",
-                summarizeLengthCheck:"Please write Summarize."
+                badgeColors:"danger",
+                summarizeLengthCheck:"Please write Summarize.",
+                btnUI:this.state.disableBtn,
             })
+            
         }
         
     }    
@@ -155,6 +186,14 @@ export default class SummarizeFor2ndGrader extends Component{
                             />
                         </FloatingLabel>
                         </InputGroup>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <span style={{color:this.state.summarizeInputColor}}>{this.state.summarizeInputLength}</span>/1,100 characters
+                    </Col>
+                    <Col className="justify-content-end">
+                        <Badge bg={this.state.badgeColors}>{this.state.summarizeLengthCheck}</Badge>
                     </Col>
                 </Row>
                 <Row>
