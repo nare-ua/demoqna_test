@@ -44,12 +44,13 @@ export default class SummarizeFor2ndGrader extends Component{
         let _url = "http://211.248.186.164:18111/passthru";
         let _engine = "davinci";
         let _prompt = "My second grader asked me what this passage means:\n\"\"\"\n" + this.state.summarizeInputText + "\n\"\"\"\nI rephrased it for him, in plain language a second grader can understand:\n\"\"\"\n";
-        let _temperature = 0;
+        let _temperature = 0.5;
         let _top_p = 1.0;
-        let _max_tokens = 200;
-        let _frequency_penalty = 0.0;
+        let _max_tokens = 100;
+        let _frequency_penalty = 0.2;
         let _presence_penalty = 0.0;
-        let _stop = '["\"\"\""]';
+        let _best_of = 1;
+        let _stop = ["\"\"\""];
         axios.post(_url, {
             params:{
                 "engine"              : _engine,
@@ -59,6 +60,7 @@ export default class SummarizeFor2ndGrader extends Component{
                 "top_p"               : _top_p,
                 "frequency_penalty"   : _frequency_penalty,
                 "presence_penalty"    : _presence_penalty,
+                "best_of"             : _best_of,
                 "stop"                : _stop,
             },
         }, {
@@ -70,10 +72,19 @@ export default class SummarizeFor2ndGrader extends Component{
         .then((res) => {
             // console.log("APIresult ::", res.data.choices[0].text);
             let rtnText = res.data.choices[0].text;
-            //SummarizeAPIText
-            this.setState({
-                summarizeResult:<SummarizeAPIText text={rtnText} />,
-            })
+            let _lastStr = rtnText.slice(-1);
+            let _splitStr = "";
+            console.log("lastStr::", _lastStr)
+            // if (_lastStr === ".") {
+                //SummarizeAPIText
+                this.setState({
+                    summarizeResult:<SummarizeAPIText text={rtnText} />,
+                })
+            // } else {
+            //     _splitStr = rtnText.split(".");
+            //     console.log("split::")
+                
+            // }
         })
         .catch((err) => {
             if (err.response) {

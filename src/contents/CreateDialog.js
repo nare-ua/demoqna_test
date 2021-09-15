@@ -92,9 +92,9 @@ export default class CreateDialog extends Component{
         let _max_tokens = 60;
         let _top_p = 1.0;
         let _frequency_penalty = 0.0;
-        let _presence_penalty = 0.6;
+        let _presence_penalty = 0.0;
         let _best_of = 1;
-        let _stop = '["\n"]';
+        let _stop = ["\n"];
         let _engine = "davinci";
         
         axios.post(url, {
