@@ -48,6 +48,9 @@ export default class CreateDialog extends Component{
                     rtnVals.StandardAmericanEnglish = test3[1]; // 표준 미국 영어
                 } else {
                     rtnVals.Answer = test3[0]; // 가이드라인
+                    if (rtnVals.Answer === "Standard British English") {
+                        rtnVals.StandardBritishEnglish = test3[1];
+                    }
                 }
             }
         }
@@ -56,6 +59,12 @@ export default class CreateDialog extends Component{
     }
     // 통신 method
     requestAPI = (params) => {
+        let _lastStr = params.slice(-1);
+        console.log("lastStr::", _lastStr)
+        if (_lastStr === ".") {
+        } else {
+            // params = params + ".";
+        }
         console.log("requestAPI params ::", params);
         this.setState({
             btnUI:this.state.loeadingBtn,
@@ -64,7 +73,7 @@ export default class CreateDialog extends Component{
         // 주소는 고정
         let url = "http://211.248.186.164:18111/passthru";
         // 셋팅할 데이타 초기값
-        let _prompt = "Original:i child.\nStandard American English:I am a child.\nOriginal:She no went to the market.\nStandard American English:She didn't go to the market.\nOriginal:i am not speak English.\nStandard American English:I don't speak English.\nOriginal:" + params + "\nStandard American English:";
+        let _prompt = "Original:" + params + "\nStandard American English:";
         let _temperature = 0;
         let _max_tokens = 60;
         let _top_p = 1.0;
@@ -91,7 +100,7 @@ export default class CreateDialog extends Component{
             }
         })
         .then((res) => {
-            console.log("res ::", JSON.stringify(res.data.choices[0].text));
+            console.log("res ::", JSON.stringify(res.data));
             let rtnParam = this.splitCustomer(res.data.choices[0].text);//가공
             console.log("returnTest::", rtnParam);
 
@@ -120,7 +129,7 @@ export default class CreateDialog extends Component{
     };
 
     inputStrings = (e) => {
-        // console.log("inputStrings ::", e.target.value)
+        // console.log("inputStrings ::", e.target.value.trim().length);
         this.setState({
             promptQ : e.target.value,
         })
