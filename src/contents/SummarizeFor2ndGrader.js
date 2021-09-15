@@ -28,7 +28,6 @@ export default class SummarizeFor2ndGrader extends Component{
             >Enter</Button>,
         }
     }
-
     
     requestAPI = (params) => {
         if (this.state.summarizeInputText == "") {

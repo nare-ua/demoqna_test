@@ -6,11 +6,19 @@ const APIText = (props) => {
     let _StandardAmericanEnglish = "";
     let _StandardBritishEnglish = "";
     let _Answer = "";
+    let _inputMyText = "";
 
+    if (props.text.inputMyText) {
+        console.log("수정값 ::", props.text.inputMyText);
+        _inputMyText = (<Alert variant="primary">
+                            <Alert.Heading>Fixed</Alert.Heading>
+                            <p>{props.text.inputMyText}</p>
+                        </Alert>);
+    }
     if (props.text.Original) {
         console.log("ori있음", props.text.Original)
         // setOriginal(props.text.Original);
-        _Original = (<Alert variant="primary">
+        _Original = (<Alert variant="info">
                         <Alert.Heading>Original</Alert.Heading>
                         <p>{props.text.Original}</p>
                     </Alert>);
@@ -53,6 +61,8 @@ const APIText = (props) => {
 
     return(
         <Row>
+            {_inputMyText}
+            <hr />
             {_Original}
             {_StandardAmericanEnglish}
             {_StandardBritishEnglish}

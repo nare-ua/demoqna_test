@@ -35,7 +35,8 @@ export default class CreateDialog extends Component{
         let test3;
         let rtnVals = [];
         console.log("testSplit::", test1[0]);
-        for (let i = 0; i<test1.length; i++) {
+        rtnVals.inputMyText = test1[0];
+        for (let i = 1; i<test1.length; i++) {
             if (test1[i].trim() === "") {
                 //    console.log(i + "번 빈값")
             } else {
@@ -45,11 +46,17 @@ export default class CreateDialog extends Component{
                 if (test3[0] === "Original") {
                     rtnVals.Original = test3[1]; //본문
                 } else if (test3[0] === "Standard American English") {
-                    rtnVals.StandardAmericanEnglish = test3[1]; // 표준 미국 영어
+                    if (!rtnVals.StandardAmericanEnglish) {
+                        rtnVals.StandardAmericanEnglish = test3[1]; // 표준 미국 영어
+                    }
                 } else {
-                    rtnVals.Answer = test3[0]; // 가이드라인
-                    if (rtnVals.Answer === "Standard British English") {
-                        rtnVals.StandardBritishEnglish = test3[1];
+                    if (!rtnVals.Answer) {
+                        rtnVals.Answer = test3[0]; // 가이드라인
+                        if (rtnVals.Answer === "Standard British English") {
+                            if (!rtnVals.StandardBritishEnglish) {
+                                rtnVals.StandardBritishEnglish = test3[1];
+                            }
+                        }
                     }
                 }
             }
@@ -57,6 +64,13 @@ export default class CreateDialog extends Component{
         console.log("result::", rtnVals)
         return rtnVals;
     }
+
+    onKeyPress = (e) => {
+        if (e.key == "Enter") {
+            this.requestAPI(this.state.promptQ);
+        }
+    }
+
     // 통신 method
     requestAPI = (params) => {
         let _lastStr = params.slice(-1);
@@ -79,6 +93,7 @@ export default class CreateDialog extends Component{
         let _top_p = 1.0;
         let _frequency_penalty = 0.0;
         let _presence_penalty = 0.6;
+        let _best_of = 1;
         let _stop = '["\n"]';
         let _engine = "davinci";
         
@@ -91,6 +106,7 @@ export default class CreateDialog extends Component{
                 "top_p"               : _top_p,
                 "frequency_penalty"   : _frequency_penalty,
                 "presence_penalty"    : _presence_penalty,
+                "best_of"             : _best_of,
                 "stop"                : _stop,
             },
         }, {
@@ -100,7 +116,7 @@ export default class CreateDialog extends Component{
             }
         })
         .then((res) => {
-            console.log("res ::", JSON.stringify(res.data));
+            console.log("res ::", JSON.stringify(res.data.choices[0]));
             let rtnParam = this.splitCustomer(res.data.choices[0].text);//가공
             console.log("returnTest::", rtnParam);
 
@@ -143,6 +159,7 @@ export default class CreateDialog extends Component{
                         <InputGroup>
                             <InputGroup.Text id="inputQuestions">Q :</InputGroup.Text>
                             <FormControl 
+                                onKeyPress = {(e) => this.onKeyPress(e)}
                                 onChange = {(e) => this.inputStrings(e)}
                                 type="text"
                                 placeholder="Please write here~!"
