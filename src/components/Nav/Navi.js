@@ -5,6 +5,7 @@ import Home from '../Body/Home';
 import DemoQna from '../../contents/Demo_qna';
 import CreateDialog from '../../contents/CreateDialog';
 import SummarizeFor2ndGrader from '../../contents/SummarizeFor2ndGrader';
+import NotesToSummary from '../../contents/NotesToSummary';
 import style from '../Body/css/App.module.css';
 import { Helmet } from 'react-helmet';
 
@@ -77,6 +78,11 @@ render(){
                                         brandtitle:selectedKey,
                                         page:<SummarizeFor2ndGrader />,
                                     })
+                                } else if (selectedKey === "Notes to Summary") {
+                                    this.setState({
+                                        brandtitle:selectedKey,
+                                        page:<NotesToSummary />,
+                                    })
                                 }
                             }}
                         >
@@ -91,6 +97,9 @@ render(){
                             </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link eventKey="Summary for Kids">Summary for Kids</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link eventKey="Notes to Summary">Notes to Summary</Nav.Link>
                             </Nav.Item>
                             <NavDropdown title="Menu" id="nav-dropdown">
                                 <NavDropdown.Item eventKey="AILA">AILA<sup>TM</sup></NavDropdown.Item>
