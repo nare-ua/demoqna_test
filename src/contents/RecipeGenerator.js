@@ -1,6 +1,6 @@
 import { Component } from "react";
 import common from "../common/APIConnection";
-import { Col, Container, FormControl, InputGroup, Row, Button, Spinner } from "react-bootstrap";
+import { Col, Container, FormControl, InputGroup, Row, Button, Spinner, Badge, Alert } from "react-bootstrap";
 import RecipeGeneratorAPIRow from "./ApiRow/summarizeRow/RecipeGeneratorApiRow";
 
 export default class RecipeGenerator extends Component{
@@ -31,7 +31,7 @@ export default class RecipeGenerator extends Component{
     requestAPI (params) {
         this.setState({btnUI:this.state.loadingBtn})
         let _temperature = 0;
-        let _max_tokens = 120;
+        let _max_tokens = 200;
         let _top_p = 1.0;
         let _frequency_penalty = 0.0;
         let _presence_penalty = 0.0;
@@ -73,22 +73,24 @@ export default class RecipeGenerator extends Component{
 
     //json 가공
     splitCustomer = (param) => {
-        // console.log("splitCustomer::", param);
+        console.log("splitCustomer::", param);
         let test1 = param.split("\n");
         let rtnVals = [];
         // console.log("testSplit::", test1);
         
         for (let i = 1; i<test1.length; i++) {
-            if (test1[i]) {
-                if (test1[i] === this.state.recipeName) {
-                    break;
-                }
-                if (i > 1) {
-                    rtnVals.push( test1[i] );
-                } else {
-                    rtnVals.push( test1[i] );
-                }
-            } 
+            if (test1[i] === this.state.recipeName) {
+                break;
+            } else {
+
+                if (test1[i]) {
+                    if (i > 1) {
+                        rtnVals.push( test1[i] );
+                    } else {
+                        rtnVals.push( test1[i] );
+                    }
+                } 
+            }
         }
         // console.log("result::", rtnVals)
         return rtnVals;
@@ -112,30 +114,24 @@ export default class RecipeGenerator extends Component{
             <Container className="col-10">
                 <Row>
                     <Col>
-                        <InputGroup className="mb-3">
-                            <InputGroup.Text id="recipeName" className="col-2">Recipe :</InputGroup.Text>
-                        <FormControl 
+                        <Alert>
+                            <Alert.Heading><b>Recipe :</b></Alert.Heading>
+                            <FormControl 
+                            className="mb-2"
                             placeholder="Recipe Name" aria-label="Recipe Name"
-                            aria-aria-describedby="recipeName"
                             defaultValue={this.state.recipeName}
                             onChange = {(e) => this.inputRecipe(e, "recipeName")}
                             />
-                        </InputGroup>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col>
-                        <InputGroup>
-                            <InputGroup.Text className="col-2">Ingredients</InputGroup.Text>
+                            <b className="m-2">Ingredients :</b>
                             <FormControl 
+                                className="mt-2"
                                 as="textarea" style={{ height: "200px",}} 
                                 defaultValue={this.state.inputIngredients} 
                                 onChange = {(e) => this.inputRecipe(e, "ingredients")}
                             />
-                        </InputGroup>
+                        </Alert>
                     </Col>
                 </Row>
-                <hr />
                 <Row>
                     <Col className="d-grid gap-2">
                         {this.state.btnUI}
