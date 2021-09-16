@@ -29,19 +29,14 @@ export default class NotesToSummary extends Component{
 
     //json 가공
     splitCustomer = (param) => {
-        // console.log("splitCustomer::", param);
         let test1 = param.split("\n");
-        let test3;
         let rtnVals = [];
-        // console.log("testSplit::", test1);
         
         for (let i = 1; i<test1.length; i++) {
             if (test1[i]) {
-                // console.log("test1[" + i + "] ::" +test1[i]);
                 rtnVals += test1[i];
             }
         }
-        // console.log("result::", rtnVals)
         return rtnVals;
     }
 

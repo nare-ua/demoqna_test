@@ -6,6 +6,7 @@ import DemoQna from '../../contents/Demo_qna';
 import CreateDialog from '../../contents/CreateDialog';
 import SummarizeFor2ndGrader from '../../contents/SummarizeFor2ndGrader';
 import NotesToSummary from '../../contents/NotesToSummary';
+import RecipeGenerator from '../../contents/RecipeGenerator';
 import style from '../Body/css/App.module.css';
 import { Helmet } from 'react-helmet';
 
@@ -83,6 +84,11 @@ render(){
                                         brandtitle:selectedKey,
                                         page:<NotesToSummary />,
                                     })
+                                } else if (selectedKey === "Recipe Generator") {
+                                    this.setState({
+                                        brandtitle:selectedKey,
+                                        page:<RecipeGenerator />,
+                                    })
                                 }
                             }}
                         >
@@ -100,6 +106,9 @@ render(){
                             </Nav.Item>
                             <Nav.Item>
                                 <Nav.Link eventKey="Notes to Summary">Notes to Summary</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link eventKey="Recipe Generator">Recipe Generator</Nav.Link>
                             </Nav.Item>
                             <NavDropdown title="Menu" id="nav-dropdown">
                                 <NavDropdown.Item eventKey="AILA">AILA<sup>TM</sup></NavDropdown.Item>
