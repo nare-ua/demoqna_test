@@ -2,6 +2,7 @@ import { Component } from "react";
 import common from "../common/APIConnection";
 import { Col, Container, FormControl, InputGroup, Row, Button, Spinner, Badge, Alert } from "react-bootstrap";
 import RecipeGeneratorAPIRow from "./ApiRow/summarizeRow/RecipeGeneratorApiRow";
+import style from "../components/Body/css/App.module.css";
 
 export default class RecipeGenerator extends Component{
 
@@ -112,10 +113,11 @@ export default class RecipeGenerator extends Component{
     render() {
         return(
             <Container className="col-10">
+                <h1 className={style.RecipeGenerator} style={{fontWeight:"bold"}}>Recipe Generator</h1>
                 <Row>
                     <Col>
-                        <Alert>
-                            <Alert.Heading><b>Recipe :</b></Alert.Heading>
+                        <Alert variant="light">
+                            <Alert.Heading><b className="m-2">Recipe :</b></Alert.Heading>
                             <FormControl 
                             className="mb-2"
                             placeholder="Recipe Name" aria-label="Recipe Name"
