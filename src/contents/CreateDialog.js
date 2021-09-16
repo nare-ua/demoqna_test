@@ -1,7 +1,7 @@
 import { Component } from "react";
-import axios from "axios";
 import { Col, Container, Row, Button, InputGroup, FormControl,Spinner } from "react-bootstrap";
 import { TextAPI } from "./ApiRow";
+import common from "../common/APIConnection";
 
 export default class CreateDialog extends Component{
     constructor(props) {
@@ -66,7 +66,7 @@ export default class CreateDialog extends Component{
     }
 
     onKeyPress = (e) => {
-        if (e.key == "Enter") {
+        if (e.key === "Enter") {
             this.requestAPI(this.state.promptQ);
         }
     }
@@ -77,15 +77,12 @@ export default class CreateDialog extends Component{
         console.log("lastStr::", _lastStr)
         if (_lastStr === ".") {
         } else {
-            // params = params + ".";
+            params = params + ".";
         }
         console.log("requestAPI params ::", params);
         this.setState({
             btnUI:this.state.loeadingBtn,
         })
-
-        // 주소는 고정
-        let url = "http://211.248.186.164:18111/passthru";
         // 셋팅할 데이타 초기값
         let _prompt = "Original:" + params + "\nStandard American English:";
         let _temperature = 0;
@@ -96,27 +93,21 @@ export default class CreateDialog extends Component{
         let _best_of = 1;
         let _stop = ["\n"];
         let _engine = "davinci";
-        
-        axios.post(url, {
-            params:{
-                "engine"              : _engine,
-                "prompt"              : _prompt,
-                "temperature"         : _temperature,
-                "max_tokens"          : _max_tokens,
-                "top_p"               : _top_p,
-                "frequency_penalty"   : _frequency_penalty,
-                "presence_penalty"    : _presence_penalty,
-                "best_of"             : _best_of,
-                "stop"                : _stop,
-            },
-        }, {
-            headers:{
-                "Content-Type": "application/json",
-                "accept": "application/json",
-            }
-        })
+        params = {
+            "engine"              : _engine,
+            "prompt"              : _prompt,
+            "temperature"         : _temperature,
+            "max_tokens"          : _max_tokens,
+            "top_p"               : _top_p,
+            "frequency_penalty"   : _frequency_penalty,
+            "presence_penalty"    : _presence_penalty,
+            "best_of"             : _best_of,
+            "stop"                : _stop,
+        }
+
+        common.requestAPI (params)
         .then((res) => {
-            console.log("res ::", JSON.stringify(res.data.choices[0]));
+            console.log("res ::", JSON.stringify(res.data));
             let rtnParam = this.splitCustomer(res.data.choices[0].text);//가공
             console.log("returnTest::", rtnParam);
 

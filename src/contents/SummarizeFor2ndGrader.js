@@ -1,10 +1,8 @@
-import zIndex from "@material-ui/core/styles/zIndex";
-import CommonAlert from "../components/commonComponentModules/CommonMSG";
 import React, { Component } from "react";
 import { Col, Container, InputGroup, Row, Button, Spinner, FormControl, FloatingLabel, Badge  } from "react-bootstrap";
-import axios from "axios";
 import style from "../components/Body/css/App.module.css";
 import { SummarizeAPIText } from "./ApiRow";
+import common from "../common/APIConnection";
 
 export default class SummarizeFor2ndGrader extends Component{
     constructor(props) {
@@ -34,23 +32,19 @@ export default class SummarizeFor2ndGrader extends Component{
     }
     
     requestAPI = (params) => {
-        if (this.state.summarizeInputText == "") {
-            // alert(this.state.summarizeLengthCheck);
+        if (this.state.summarizeInputText === "") {
             this.setState({summarizeInputColor:"red"})
             return;
         }
         if (this.state.summarizeInputLength > 1100) {
-            // console.log(this.state.summarizeInputLength)
             this.setState({summarizeLengthCheck:"too long your text."})
             return;
         }
-        // console.log("requestAPI Summarize ::", params);
         this.setState({
             btnUI:this.state.loadingBtn, 
         })
 
         // 값 셋팅
-        let _url = "http://211.248.186.164:18111/passthru";
         let _engine = "davinci";
         let _prompt = "My second grader asked me what this passage means:\n\"\"\"\n" + this.state.summarizeInputText + "\n\"\"\"\nI rephrased this for him, in plain language a second grader can understand:\n\"\"\"\n";
         let _temperature = 0.5;
@@ -60,30 +54,22 @@ export default class SummarizeFor2ndGrader extends Component{
         let _presence_penalty = 0.0;
         let _best_of = 1;
         let _stop = ["\"\"\""];
-        axios.post(_url, {
-            params:{
-                "engine"              : _engine,
-                "prompt"              : _prompt,
-                "temperature"         : _temperature,
-                "max_tokens"          : _max_tokens,
-                "top_p"               : _top_p,
-                "frequency_penalty"   : _frequency_penalty,
-                "presence_penalty"    : _presence_penalty,
-                "best_of"             : _best_of,
-                "stop"                : _stop,
-            },
-        }, {
-            headers:{
-                "Content-Type": "application/json",
-                "accept": "application/json"
-            }
-        })
+        
+        params = {
+            "engine"              : _engine,
+            "prompt"              : _prompt,
+            "temperature"         : _temperature,
+            "max_tokens"          : _max_tokens,
+            "top_p"               : _top_p,
+            "frequency_penalty"   : _frequency_penalty,
+            "presence_penalty"    : _presence_penalty,
+            "best_of"             : _best_of,
+            "stop"                : _stop,
+        }
+
+        common.requestAPI(params)
         .then((res) => {
-            // console.log("APIresult ::", res.data.choices[0].text);
             let rtnText = res.data.choices[0].text;
-            // let _lastStr = rtnText.slice(-1);
-            // let _splitStr = "";
-            // console.log("lastStr::", _lastStr)
             this.setState({
                 summarizeResult:<SummarizeAPIText text={rtnText} />,
             })

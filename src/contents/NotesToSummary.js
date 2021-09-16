@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { Component } from "react"
+import common from "../common/APIConnection"
 import NotesToSummaryAPIRow from "./ApiRow/summarizeRow/NotesToSummaryAPIRow";
 import { Col, Container, FormControl, InputGroup, Row,Button, Spinner } from "react-bootstrap";
 
@@ -88,22 +88,17 @@ export default class NotesToSummary extends Component{
         let _engine = "davinci-instruct-beta";
         let _prompt = "Convert my short hand into a first-hand account of the meeting:\n\n" + params + "\n\nSummarize in " + _max_tokens + " characters or less:";
         
-        axios.post(url, {
-            params:{
-                "engine"              : _engine,
-                "prompt"              : _prompt,
-                "temperature"         : _temperature,
-                "max_tokens"          : _max_tokens,
-                "top_p"               : _top_p,
-                "frequency_penalty"   : _frequency_penalty,
-                "presence_penalty"    : _presence_penalty,
-            },
-        }, {
-            headers:{
-                "Content-Type": "application/json",
-                "accept": "application/json",
-            }
-        })
+        params = {
+            "engine"              : _engine,
+            "prompt"              : _prompt,
+            "temperature"         : _temperature,
+            "max_tokens"          : _max_tokens,
+            "top_p"               : _top_p,
+            "frequency_penalty"   : _frequency_penalty,
+            "presence_penalty"    : _presence_penalty,
+        };
+
+        common.requestAPI (params)
         .then((res) => {
             let rtnParam = this.splitCustomer(res.data.choices[0].text);
             if (res.data) {

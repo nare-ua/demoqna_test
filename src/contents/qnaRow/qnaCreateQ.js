@@ -2,8 +2,8 @@ import { Component } from "react";
 import InputTypeContents from "./typeContents/inputContentsType";
 import InputTypeContents2 from "./typeContents/inputContents2";
 import QnaAddRow from "./qnaAddRow";
-import axios from "axios";
 import { Alert, Button,ListGroup,Spinner } from "react-bootstrap";
+import common from "../../common/APIConnection"
 
 export default class QnaCreateQ extends Component{
     constructor(props){
@@ -59,33 +59,17 @@ export default class QnaCreateQ extends Component{
     }
     //통신 method
     requestAPI = (params) => {
-        // console.log("params :", params.text);
-        // this.state.btnCtr = this.state.loadingBtn;
         this.setState({
             answerTypeContents:this.state.loadingPage,
             btnCtr:this.state.loadingBtn,
             getQuestion:"",
-        })
-        // console.log("params-type :", params.question_type);
-        let url="http://211.248.186.164:18111/questions";
-        axios.post(url, {
-            question_type: params.question_type,
-            text: params.text
-        },
-        {
-            headers:{
-                "Content-Type": "application/json",
-                "accept": "application/json"
-            }
-        })
+        });
+
+        common.requestAPIQNA (params)
         .then((res)=>{
             // console.log("LEN:", res.data.questions.length);//질문 갯수
             let leng = res.data.questions.length;
-            // console.log("response:", res);
-            // console.log("question1:",res.data.questions[0].question);
-            // const qrr = [];
             if (leng > 0) {//받아온 질문이 있는경우
-                
                 this.setState({
                     answerTypeContents:"",
                     getQuestion:res.data.questions,
@@ -119,9 +103,9 @@ export default class QnaCreateQ extends Component{
             questionTextValue:questionTextValue
         })
     }
+
     // qna add row event 
     makeHints = (_hintFlag) => {
-        // console.log("makeHints::", _hintFlag)
         if (_hintFlag) {
             return false;
         } else {
@@ -144,8 +128,6 @@ export default class QnaCreateQ extends Component{
         })
     }
 
-  
-
     questionType_onClick = (e) =>{
         let typeValue = e.target.value;
         // console.log("qnaCreateQ :", typeValue);
@@ -157,7 +139,6 @@ export default class QnaCreateQ extends Component{
 
     //createQuestion EventHandler
     createQuestion = (e) => {
-        // console.log("QNACreate:::", document.getElementById("textArea_byteLimit").value)
         let checkValue = document.getElementById("textArea_byteLimit").value;
         if (checkValue.trim()==="") {
             alert("Please enter your text.");
