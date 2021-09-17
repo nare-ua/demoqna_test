@@ -124,7 +124,7 @@ render(){
                 </Navbar>
             <span className="col-10"><hr style={{border:'black solid 2px'}}/></span>
             </Container>
-            <Container>
+            <Container className="col-10">
                 {_pages}
             </Container>
         </Container>

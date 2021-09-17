@@ -12,7 +12,7 @@ export default class NotesToSummary extends Component{
             notesToSummaryAPI:"",
             btnUI:  <Button className="primary" size="lg"
                         onClick = {(e) => this.requestAPI(this.state.myInputText)}
-                    >CreateDialog</Button>,
+                    >Summarize</Button>,
             loadingBtn:<Button variant="primary" disabled>
                         <Spinner
                             as="span"
@@ -23,7 +23,7 @@ export default class NotesToSummary extends Component{
                         />Loading...</Button>,
             defaultBtn:<Button className="primary" size="lg"
                             onClick = {(e) => this.requestAPI(this.state.myInputText)}
-                        >CreateDialog</Button>,
+                        >Summarize</Button>,
         }
     }
 
@@ -130,7 +130,7 @@ export default class NotesToSummary extends Component{
                 <Row>
                     <Col>
                         <InputGroup>
-                            <InputGroup.Text>Note to Summary</InputGroup.Text>
+                            <InputGroup.Text>Note</InputGroup.Text>
                             <FormControl 
                                 as="textarea" style={{ height: "200px",}} 
                                 defaultValue={this.state.myInputText} 

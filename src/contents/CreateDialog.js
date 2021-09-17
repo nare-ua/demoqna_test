@@ -13,7 +13,7 @@ export default class CreateDialog extends Component{
             rtnVal : [],
             btnUI:  <Button className="primary" size="lg"
                         onClick = {(e) => this.requestAPI(this.state.promptQ)}
-                    >CreateDialog</Button>,
+                    >Fix</Button>,
             loeadingBtn:<Button variant="primary" disabled>
                         <Spinner
                             as="span"
@@ -24,7 +24,7 @@ export default class CreateDialog extends Component{
                         />Loading...</Button>,
             defaultBtn:<Button className="primary" size="lg"
                             onClick = {(e) => this.requestAPI(this.state.promptQ)}
-                        >CreateDialog</Button>,
+                        >Fix</Button>,
         }
     }
 

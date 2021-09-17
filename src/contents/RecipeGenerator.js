@@ -13,7 +13,7 @@ export default class RecipeGenerator extends Component{
             inputIngredients:"Fritos\nChili\nShredded cheddar cheese\nSweet white or red onions, diced small\nSour cream",
             btnUI:  <Button className="primary" size="lg"
                         onClick = {(e) => this.requestAPI(this.state.myInputText)}
-                    >CreateDialog</Button>,
+                    >Generate</Button>,
             loadingBtn:<Button variant="primary" disabled>
                         <Spinner
                             as="span"
@@ -24,7 +24,7 @@ export default class RecipeGenerator extends Component{
                         />Loading...</Button>,
             defaultBtn:<Button className="primary" size="lg"
                             onClick = {(e) => this.requestAPI(this.state.myInputText)}
-                        >CreateDialog</Button>,
+                        >Generate</Button>,
             recipeResult:"",
         }
     }
@@ -112,7 +112,7 @@ export default class RecipeGenerator extends Component{
 
     render() {
         return(
-            <Container className="col-10">
+            <Container>
                 <h1 className={style.RecipeGenerator} style={{fontWeight:"bold"}}>Recipe Generator</h1>
                 <Row>
                     <Col>
