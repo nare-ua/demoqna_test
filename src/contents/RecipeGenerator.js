@@ -117,7 +117,7 @@ export default class RecipeGenerator extends Component{
                 <Row>
                     <Col>
                         <Alert variant="light">
-                            <Alert.Heading><b className="m-2">Recipe :</b></Alert.Heading>
+                            <Alert.Heading><b className="m-2">Menu :</b></Alert.Heading>
                             <FormControl 
                             className="mb-2"
                             placeholder="Recipe Name" aria-label="Recipe Name"
